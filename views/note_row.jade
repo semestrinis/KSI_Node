@@ -1,0 +1,15 @@
+block content 
+tr
+    td= note.Pavadinimas    
+    td
+        span(style="color: ##{note.Spalva}")
+            b #{note.Kategorija}
+    td= note.DataIrLaikas
+    td(class="text-right") 
+        a(href="/note/#{note.ID}", class="btn btn-success", role="button")
+            span(class="glyphicon glyphicon-search")
+            |  Skaityti
+        | 
+        a(href="/note/delete/#{note.ID}", class="btn btn-danger", role="button")
+            span(class="glyphicon glyphicon-remove")
+            |  Trinti

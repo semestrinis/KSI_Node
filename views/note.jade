@@ -1,0 +1,45 @@
+extends layout
+
+block content
+    div(class="container")
+        div(class="row")
+            div(class="col-md-8")
+                h1 Užrašas
+        div(class="row move-down")
+            div(class="col-md-8")
+                a(href="/", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-home")
+                | 
+                a(href="/cat", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-list")
+                    |  Kategorijos
+                | 
+                a(href="/note/new", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-plus")
+                    |  Naujas užrašas
+                    
+        if data
+            div(class="row move-down")
+                div(class="col-md-8")
+                    div(class="panel panel-default")
+                        div(class="panel-heading")
+                            h3(class="panel-title")
+                                b #{data.Pavadinimas}
+                        div(class="panel-body") #{data.Tekstas}
+                        div(class="panel-footer") 
+                            span Paskelbta: #{data.DataIrLaikas}
+                            | 
+                            span(class="pull-right") Kategorija: #{data.Kategorija}
+            div(class="row")
+                div(class="col-md-8")
+                    a(href="/note/edit/#{data.ID}", class="btn btn-warning", role="button")
+                        span(class="glyphicon glyphicon-edit")
+                        |  Redaguoti
+                    |  
+                    a(href="/note/delete/#{data.ID}", class="btn btn-danger", role="button")
+                        span(class="glyphicon glyphicon-remove")
+                        |  Trinti
+        else
+            div(class="row move-down")
+                div(class="col-md-8")
+                    b Užrašas nerastas!

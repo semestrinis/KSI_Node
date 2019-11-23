@@ -1,0 +1,57 @@
+extends layout
+
+block content
+    div(class="container")
+        div(class="row")
+            div(class="col-md-8")
+                if data
+                    h1 Užrašo "#{data.Pavadinimas}" keitimas
+                else
+                    h1 Užrašo keitimas
+        div(class="row move-down")
+            div(class="col-md-8")
+                a(href="/", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-home")
+                | 
+                a(href="/cat", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-list")
+                    |  Kategorijos
+                | 
+                a(href="/note/new", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-plus")
+                    |  Naujas užrašas
+        if data
+            div(class="row move-down")
+                div(class="col-md-8")
+                    form(class="form-horizontal", method="post", action="/note/edit/#{data.ID}")
+                        div(class="form-group")
+                             label(for="title", class="col-sm-2 control-label") Pavadinimas*
+                             div(class="col-sm-6")
+                                input(type="text" class="form-control", id="title", name="title", value="#{data.Pavadinimas}")
+                        div(class="form-group")
+                             label(for="cat", class="col-sm-2 control-label") Kategorija*
+                             div(class="col-sm-6")                         
+                                select(class="form-control", id="cat", name="cat")
+                                    -each k in cats
+                                        if k.ID == data.KatID
+                                            option(value="#{k.ID}", selected="selected") #{k.Pavadinimas}
+                                        else
+                                            option(value="#{k.ID}") #{k.Pavadinimas}
+                        div(class="form-group")
+                             label(for="text", class="col-sm-2 control-label") Tekstas*
+                             div(class="col-sm-6")
+                                textarea(class="form-control", id="text", name="text") #{data.Tekstas}
+                        div(class="form-group")
+                            div(class="col-sm-offset-2 col-sm-10")
+                                input(type="hidden", name="note_id", value="#{data.ID}")
+                                | 
+                                button(type="submit" class="btn btn-warning") Atnaujinti
+
+            div(class="row move-down")
+                div(class="col-md-8")
+                    if info
+                        b #{info}
+        else
+            div(class="row move-down")
+                div(class="col-md-8")
+                    b Užrašas nerastas!

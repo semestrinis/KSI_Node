@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    div(class="container")
+        div(class="row")
+            div(class="col-md-8")
+                h1 Naujas Užrašas
+        div(class="row move-down")
+            div(class="col-md-8")
+                a(href="/", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-home")
+                | 
+                a(href="/cat", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-list")
+                    |  Kategorijos
+        div(class="row move-down")
+            div(class="col-md-8")
+                form(class="form-horizontal", method="post", action="/note/new")
+                    div(class="form-group")
+                         label(for="title", class="col-sm-2 control-label") Pavadinimas*
+                         div(class="col-sm-6")
+                            input(type="text" class="form-control", id="title", name="title")
+                    div(class="form-group")
+                         label(for="cat", class="col-sm-2 control-label") Kategorija*
+                         div(class="col-sm-6")
+                            select(class="form-control", id="cat", name="cat")
+                                    -each k in data
+                                        option(value="#{k.ID}") #{k.Pavadinimas}
+                    div(class="form-group")
+                         label(for="text", class="col-sm-2 control-label") Tekstas*
+                         div(class="col-sm-6")
+                            textarea(class="form-control", id="text", name="text")
+                    div(class="form-group")
+                        div(class="col-sm-offset-2 col-sm-10")
+                            button(type="submit" class="btn btn-success") Išsaugoti
+        div(class="row move-down")
+            div(class="col-md-8")
+                if info
+                    b #{info}

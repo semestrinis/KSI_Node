@@ -1,0 +1,49 @@
+extends layout
+
+block content
+    div(class="container")
+        div(class="row")
+            div(class="col-md-8")
+                if data                
+                    h1 Užrašo "#{data.Pavadinimas}" trynimas
+                else
+                    h1 Užrašo trynimas
+        div(class="row move-down")
+            div(class="col-md-8")
+                a(href="/", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-home")
+                |  
+                a(href="/cat", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-list")
+                    |  Kategorijos
+                | 
+                a(href="/note/new", class="btn btn-primary", role="button")
+                    span(class="glyphicon glyphicon-plus")
+                    |  Naujas užrašas
+        div(class="row move-down")
+            div(class="col-md-8")
+                if data 
+                    form(class="form-horizontal", method="post", action="/note/delete/#{note_id}")
+                        div(class="form-group")
+                            div(class="col-sm-8")
+                                label(class="control-label text-danger") Ar tikrai nori ištrinti šį užrašą?
+                        div(class="form-group")
+                             div(class="col-sm-8")
+                                div(class="panel panel-default")
+                                    div(class="panel-heading")
+                                        h3(class="panel-title")
+                                            b #{data.Pavadinimas}
+                                    div(class="panel-body") #{data.Tekstas}
+                                    div(class="panel-footer") 
+                                        span Paskelbta: #{data.DataIrLaikas}
+                                        | 
+                                        span(class="pull-right") Kategorija: #{data.Kategorija}
+                        div(class="form-group")
+                            div(class="col-sm-8")
+                                button(type="submit" class="btn btn-danger") Taip
+                                | 
+                                a(href="/", class="btn btn-success", role="button") Ne
+        div(class="row move-down")
+            div(class="col-md-8")
+                if info
+                    b #{info}
