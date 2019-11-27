@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
     "debug": "~4.1.1",
@@ -14,5 +15,18 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "sqlite3" : "*"
-  }
+  },
+  "description": "1. Ádiegti reikalingus modulius:\r \tnpm install\r 2. Paleisti:\r \tnpm start\r 3. Jei nepasileidþia: pakeisti portà bin/www faile arba atnaujinti sqlite3 modulá:\r \tnpm uninstall sqlite3\r \tnpm install sqlite3\r 4. Sustabdyti:\r \tCTRL + C",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/semestrinis/KSI_Node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/semestrinis/KSI_Node/issues"
+  },
+  "homepage": "https://github.com/semestrinis/KSI_Node#readme"
 }
