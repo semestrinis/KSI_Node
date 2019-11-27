@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var note = require('./routes/note');
 var cats = require('./routes/cats');
+var apiAndroid = require('./routes/api/android');
 var app = express();
 
 var sqlite3 = require('sqlite3');
@@ -39,6 +40,7 @@ app.use(function(req, res, next)
 app.use('/', routes);
 app.use('/note', note);
 app.use('/cat', cats);
+app.use('/api/android', apiAndroid);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
