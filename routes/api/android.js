@@ -1,30 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res) 
+router.get('/get', function(req, res) 
 {
-    var db = req.db;
-    
-    getCategories(db, function(cats)
+	var db = req.db;
+	db.all('SELECT * FROM Matavimai, Ribos ORDER BY ID DESC LIMIT 1;', function(err,matavimas)
     {
-        res.render('cats', { title: 'Kategorijos', data:cats });
+        if(err)
+        {
+            console.log('*** Error serving querying database. ' + err);
+        }
+        else
+        {
+			res.json(matavimas);
+        }
     });
 });
 
 module.exports = router;
 
-function getCategories(db, callback)
-{
-    db.all('select Kategorija.Pavadinimas, Spalva.Kodas from Kategorija, Spalva where Spalva.ID == Kategorija.SpalvosID order by Kategorija.Pavadinimas;', function(err,rows)
-    {
-        if(err)
-        {
-            console.log('*** Error serving querying database. ' + err);
-            return callback(null);
-        }
-        else
-        {
-            return callback(rows);
-        }
-    });
-}
