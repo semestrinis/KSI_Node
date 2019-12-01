@@ -34,6 +34,8 @@ char server[] = "ksi-projektas.herokuapp.com";
 unsigned long lastConnectionTime = 0;           // last time you connected to the server, in milliseconds
 const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
 
+
+String response = "";
 //
 //unsigned long beginMicros, endMicros;
 //unsigned long byteCount = 0;
@@ -99,11 +101,14 @@ void loop()
   // send it out the serial port.  This is for debugging
   // purposes only:
   char c;
+  
   if (client.available())
   {
     c = client.read();
+    response += c;
     Serial.write(c);
   }
+  
 
   String ss = String("" + c);
 
@@ -111,7 +116,43 @@ void loop()
   // then connect again and send data:
   if (millis() - lastConnectionTime > postingInterval)
   {
+    //Serial.print(response);
+    Serial.print(response.length());
+    Serial.print("\n");
+    for(int i=0; i < response.length(); i++)
+    {
+
+//      Serial.print(response[i]);
+//      Serial.print("\n");
+      if(response[i] == 'm' && response[i+1] == 'i' && response[i+2] == 'n' && response[i+3] == ':')
+      {
+        String mint = "" + response[i+4] + response[i+5];
+        minTemp = mint.toInt();
+        i += 4;
+        Serial.print(mint);
+        Serial.print("\n");
+        Serial.print("HIT 1");
+        Serial.print("\n");
+      }
+      if(response[i] == 'm' && response[i+1] == 'a' && response[i+2] == 'x' && response[i+3] == ':')
+      {
+        String maxt = "" + response[i+4] + response[i+5];
+        maxTemp = maxt.toInt();
+        i += 4;
+        Serial.print(maxt);
+        Serial.print("\n");
+        Serial.print("HIT 2");
+        Serial.print("\n");
+      }
+    }
+
+    Serial.print("\n");
+    Serial.print(minTemp);
+    Serial.print(maxTemp);
+    Serial.print("\n");
+    
     httpRequest();
+    response = "";
   }
 }
 
@@ -185,31 +226,49 @@ void httpRequest()
     Serial.println(Ligth);
 
     Serial.println("connecting...");
-    String PostData = "appData={\"itemID\":";
-    String itemID = "A56654S";
-    PostData += itemID + ",";
+    String PostData = "";//"appData={\"itemID\":";
+    //String itemID = "A56654S";
+    //PostData += itemID + ",";
 
 
-    PostData += "\"Temperature1\":\"";
-    PostData += temperature1;
-    PostData += "\",\"Humidity\":";
+//    PostData += "\"Temperature1\":\"";
+//    PostData += temperature1;
+//    PostData += "\",\"Humidity\":";
+//    PostData += humidity;
+//    PostData += ",\"Presure\":";
+//    PostData += presure;
+//    PostData += ",\"Temperature2\":";
+//    PostData += temperature2;
+//    PostData += ",\"Ligth\":";
+//    PostData += Ligth;
+
+    PostData += "temperature1=";
+    PostData += temperature1;    
+    PostData += "humidity=";
     PostData += humidity;
-    PostData += ",\"Presure\":";
-    PostData += presure;
-    PostData += ",\"Temperature2\":";
+    PostData += "temperature2=";
     PostData += temperature2;
-    PostData += ",\"Ligth\":";
+    PostData += "presure=";
+    PostData += presure;
+    PostData += "light=";
     PostData += Ligth;
+
+
+    
 
     PostData += "}";
     Serial.println(PostData);
 
 
 
-    client.println("POST /api/arduino/putData HTTP/1.1\r\n");
-    client.println("Host: ksi-projektas.herokuapp.com\r\n");
-    client.println("User-Agent: AplinkosOroStebejimoStotele_1.0");
+    client.println("POST /api/arduino/newmat1 HTTP/1.1");
+    client.println("Host: ksi-projektas.herokuapp.com");
+    client.println("User-Agent: AplinkosOroStebejimoStotele_1.1");
     client.println("Connection: close");
+    client.println("Content-Type: application/x-www-form-urlencoded;");
+    client.println("Cache-Control: no-cache");
+    client.println("Accept: */*;");
+    client.println("Accept-Encoding: gzip, deflate;");
     client.println("Content-Type: application/x-www-form-urlencoded;");
     client.print("Content-Length: ");
     client.println(PostData.length());
