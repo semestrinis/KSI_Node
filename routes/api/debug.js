@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/get', function(req, res) 
+router.get('/getAllData', function(req, res) 
 {
 	var db = req.db;
-	db.all('SELECT * FROM Matavimai, Ribos ORDER BY ID ASC LIMIT 1;', function(err,matavimas)
+	db.all('SELECT * FROM Matavimai, Ribos;', function(err,matavimas)
     {
         if(err)
         {

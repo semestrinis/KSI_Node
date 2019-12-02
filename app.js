@@ -7,10 +7,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var note = require('./routes/note');
-var cats = require('./routes/cats');
+var aboutUs = require('./routes/aboutUs');
+var dataView = require('./routes/dataView');
 var apiAndroid = require('./routes/api/android');
 var apiArduino = require('./routes/api/arduino');
+var debug = require('./routes/api/debug');
 var app = express();
 
 var sqlite3 = require('sqlite3');
@@ -39,10 +40,11 @@ app.use(function(req, res, next)
 
 /*** route aprasymas ***/
 app.use('/', routes);
-app.use('/note', note);
-app.use('/cat', cats);
+app.use('/aboutUs', aboutUs);
+app.use('/dataView', dataView);
 app.use('/api/android', apiAndroid);
 app.use('/api/arduino', apiArduino);
+app.use('/api/debug', debug);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

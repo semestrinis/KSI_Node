@@ -34,6 +34,8 @@ char server[] = "ksi-projektas.herokuapp.com";
 unsigned long lastConnectionTime = 0;           // last time you connected to the server, in milliseconds
 const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
 
+
+String response = "";
 //
 //unsigned long beginMicros, endMicros;
 //unsigned long byteCount = 0;
@@ -99,11 +101,14 @@ void loop()
   // send it out the serial port.  This is for debugging
   // purposes only:
   char c;
+  
   if (client.available())
   {
     c = client.read();
+    response += c;
     Serial.write(c);
   }
+  
 
   String ss = String("" + c);
 
@@ -111,7 +116,52 @@ void loop()
   // then connect again and send data:
   if (millis() - lastConnectionTime > postingInterval)
   {
+    //Serial.print(response);
+//    Serial.print("\n");
+//    Serial.print(response.length());
+//    Serial.print("\n");
+
+    String tempMin = "";
+    tempMin += response[response.indexOf("RESPONSE;min:")+13];// + response[response.indexOf("RESPONSE;min:")+13];
+    tempMin += response[response.indexOf("RESPONSE;min:")+14];
+    if(response[response.indexOf("RESPONSE;min:")+15] != ";")
+    {
+      tempMin += response[response.indexOf("RESPONSE;min:")+15];
+    }
+    
+    String tempMax = "";
+    tempMax += response[response.indexOf("; max:")+6];// + response[response.indexOf("; max:")+8];
+    tempMax += response[response.indexOf("; max:")+7];
+    if(response[response.indexOf("; max:")+8] != ";")
+    {
+      tempMax += response[response.indexOf("; max:")+5];
+    }
+
+//    Serial.print("\n");
+//    Serial.print(tempMin);
+//    Serial.print("\n");
+//    Serial.print(tempMax);
+//    Serial.print("\n");
+    
+    minTemp = tempMin.toInt();
+    maxTemp = tempMax.toInt();
+
+//    Serial.print("\n");
+//    Serial.print(minTemp);
+//    Serial.print("\n");
+//    Serial.print(maxTemp);
+//    Serial.print("\n");
+
+    
+//    Serial.print(response.indexOf("RESPONSE;min:"));
+//    Serial.print("\n");
+//    Serial.print(response.indexOf(response[response.indexOf("RESPONSE;min:")]));
+//    Serial.print("\n");
+//    Serial.print(response[response.indexOf("RESPONSE;min:")+13]);
+//    Serial.print("\n");
+
     httpRequest();
+    response = "";
   }
 }
 
@@ -185,31 +235,49 @@ void httpRequest()
     Serial.println(Ligth);
 
     Serial.println("connecting...");
-    String PostData = "appData={\"itemID\":";
-    String itemID = "A56654S";
-    PostData += itemID + ",";
+    String PostData = "";//"appData={\"itemID\":";
+    //String itemID = "A56654S";
+    //PostData += itemID + ",";
 
 
-    PostData += "\"Temperature1\":\"";
-    PostData += temperature1;
-    PostData += "\",\"Humidity\":";
+//    PostData += "\"Temperature1\":\"";
+//    PostData += temperature1;
+//    PostData += "\",\"Humidity\":";
+//    PostData += humidity;
+//    PostData += ",\"Presure\":";
+//    PostData += presure;
+//    PostData += ",\"Temperature2\":";
+//    PostData += temperature2;
+//    PostData += ",\"Ligth\":";
+//    PostData += Ligth;
+
+    PostData += "temperature1=";
+    PostData += temperature1;    
+    PostData += "humidity=";
     PostData += humidity;
-    PostData += ",\"Presure\":";
-    PostData += presure;
-    PostData += ",\"Temperature2\":";
+    PostData += "temperature2=";
     PostData += temperature2;
-    PostData += ",\"Ligth\":";
+    PostData += "presure=";
+    PostData += presure;
+    PostData += "light=";
     PostData += Ligth;
+
+
+    
 
     PostData += "}";
     Serial.println(PostData);
 
 
 
-    client.println("POST /api/arduino/putData HTTP/1.1\r\n");
-    client.println("Host: ksi-projektas.herokuapp.com\r\n");
-    client.println("User-Agent: AplinkosOroStebejimoStotele_1.0");
+    client.println("POST /api/arduino/newmat1 HTTP/1.1");
+    client.println("Host: ksi-projektas.herokuapp.com");
+    client.println("User-Agent: AplinkosOroStebejimoStotele_1.1");
     client.println("Connection: close");
+    client.println("Content-Type: application/x-www-form-urlencoded;");
+    client.println("Cache-Control: no-cache");
+    client.println("Accept: */*;");
+    client.println("Accept-Encoding: gzip, deflate;");
     client.println("Content-Type: application/x-www-form-urlencoded;");
     client.print("Content-Length: ");
     client.println(PostData.length());

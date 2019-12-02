@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	div(class="container")
+		div(class="row")
+			div(class="col-md-8")
+				h1= title
+		div(class="row move-down")
+			div(class="col-md-8")
+				a(href="/dataView", class="btn btn-primary", role="button")
+					span(class="glyphicon glyphicon-list")
+					|  Stebėjimų duomenys
+				a(href="/aboutUs", class="btn btn-primary", role="button")
+					span(class="glyphicon glyphicon-plus")
+					|  Apie mus
+				a(href="https://github.com/semestrinis/KSI_Node", class="btn btn-primary", role="button")
+					span(class="glyphicon glyphicon-plus")
+					|  Šaltinio kodas

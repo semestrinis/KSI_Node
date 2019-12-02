@@ -6,7 +6,7 @@ router.get('/', function(req, res)
 {
     //ar db = req.db;
 
-    res.render('main', { title: 'Oro stebėjimo stotelė'});
+    res.render('dataView', { title: 'Stebėjimų duomenys'});
 
 });
 
