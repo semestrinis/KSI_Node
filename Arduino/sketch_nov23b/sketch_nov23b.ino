@@ -117,40 +117,49 @@ void loop()
   if (millis() - lastConnectionTime > postingInterval)
   {
     //Serial.print(response);
-    Serial.print(response.length());
-    Serial.print("\n");
-    for(int i=0; i < response.length(); i++)
-    {
+//    Serial.print("\n");
+//    Serial.print(response.length());
+//    Serial.print("\n");
 
-//      Serial.print(response[i]);
-//      Serial.print("\n");
-      if(response[i] == 'm' && response[i+1] == 'i' && response[i+2] == 'n' && response[i+3] == ':')
-      {
-        String mint = "" + response[i+4] + response[i+5];
-        minTemp = mint.toInt();
-        i += 4;
-        Serial.print(mint);
-        Serial.print("\n");
-        Serial.print("HIT 1");
-        Serial.print("\n");
-      }
-      if(response[i] == 'm' && response[i+1] == 'a' && response[i+2] == 'x' && response[i+3] == ':')
-      {
-        String maxt = "" + response[i+4] + response[i+5];
-        maxTemp = maxt.toInt();
-        i += 4;
-        Serial.print(maxt);
-        Serial.print("\n");
-        Serial.print("HIT 2");
-        Serial.print("\n");
-      }
+    String tempMin = "";
+    tempMin += response[response.indexOf("RESPONSE;min:")+13];// + response[response.indexOf("RESPONSE;min:")+13];
+    tempMin += response[response.indexOf("RESPONSE;min:")+14];
+    if(response[response.indexOf("RESPONSE;min:")+15] != ";")
+    {
+      tempMin += response[response.indexOf("RESPONSE;min:")+15];
+    }
+    
+    String tempMax = "";
+    tempMax += response[response.indexOf("; max:")+6];// + response[response.indexOf("; max:")+8];
+    tempMax += response[response.indexOf("; max:")+7];
+    if(response[response.indexOf("; max:")+8] != ";")
+    {
+      tempMax += response[response.indexOf("; max:")+5];
     }
 
-    Serial.print("\n");
-    Serial.print(minTemp);
-    Serial.print(maxTemp);
-    Serial.print("\n");
+//    Serial.print("\n");
+//    Serial.print(tempMin);
+//    Serial.print("\n");
+//    Serial.print(tempMax);
+//    Serial.print("\n");
     
+    minTemp = tempMin.toInt();
+    maxTemp = tempMax.toInt();
+
+//    Serial.print("\n");
+//    Serial.print(minTemp);
+//    Serial.print("\n");
+//    Serial.print(maxTemp);
+//    Serial.print("\n");
+
+    
+//    Serial.print(response.indexOf("RESPONSE;min:"));
+//    Serial.print("\n");
+//    Serial.print(response.indexOf(response[response.indexOf("RESPONSE;min:")]));
+//    Serial.print("\n");
+//    Serial.print(response[response.indexOf("RESPONSE;min:")+13]);
+//    Serial.print("\n");
+
     httpRequest();
     response = "";
   }
