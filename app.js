@@ -14,10 +14,12 @@ var apiArduino = require('./routes/api/arduino');
 var debug = require('./routes/api/debug');
 var app = express();
 
-var sqlite3 = require('sqlite3');
+const { Client } = require('pg')
+
+//var sqlite3 = require('sqlite3');
 
 /*** db aprasymas ***/
-var db = new sqlite3.Database('./data/notes.db');
+//var db = new sqlite3.Database('./data/notes.db');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,11 +34,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /*** db idejimas i req ***/
-app.use(function(req, res, next) 
-{
-    req.db = db;
-    next();
-});
+// app.use(function(req, res, next) 
+// {
+//     req.db = db;
+//     next();
+// });
 
 /*** route aprasymas ***/
 app.use('/', routes);
