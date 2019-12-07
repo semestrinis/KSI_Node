@@ -7,7 +7,7 @@ router.get('/', function(req, res)
     
 });
 
-router.post('/newmat1', function(req, res) 
+router.post('/newmat1', async(req, res) =>
 {
     var db = req.db;
     
@@ -21,44 +21,99 @@ router.post('/newmat1', function(req, res)
     console.log(query1);
 	var query2 = 'SELECT * FROM Ribos ORDER BY ID DESC LIMIT 1;';
 	
-    db.all(query1, function(err)
+	//querry1
+	try 
     {
-        if(err)
-        {
-            console.log('*** Error serving querying database. ' + err);
-        }
-        else
-        {
-            console.log("Successful post of data"); 
-        }
-    });
+		const client = await pool.connect()
+		const result = await client.query(query1);
+    } 
+    catch (err) 
+    {
+		console.error(err);
+		res.send("Error " + err);
+	}
 	
-	
-	db.all(query2, function(err,ribos)
-	{
-		console.log(ribos);
-		if(ribos!=null)
+	//querry2
+	try 
+    {
+		const client = await pool.connect()
+		const result = await client.query(query2);
+		const results = { 'results': (result) ? result.rows : null};
+		if(ribos[0].Min_Temp != null && ribos[0].Max_Temp != null)
 		{
-			
-			if(ribos[0].Min_Temp != null && ribos[0].Max_Temp != null)
-			{
-				console.log("3");
-				var min = ribos[0].Min_Temp;
-				var max = ribos[0].Max_Temp;
-				res.format ({'text/plain': function() {res.send(`RESPONSE;min:${min}; max:${max};RESPONSE`)}});
-				console.log("3.5");
-			}	
-			console.log("4");			
-		}
+			console.log("3");
+			var min = ribos[0].Min_Temp;
+			var max = ribos[0].Max_Temp;
+			res.format ({'text/plain': function() {res.send(`RESPONSE;min:${min}; max:${max};RESPONSE`)}});
+			console.log("3.5");
+		}	
 		else
 		{
 			console.log("5");
 			res.format ({'text/plain': function() {res.send(`RESPONSE;min:20; max:24;RESPONSE`)}});
 			console.log("6");
 		}
-		console.log("7");
+    } 
+    catch (err) 
+    {
+		console.error(err);
+		res.send("Error " + err);
+	}
+	
+
+	// try 
+    // {
+    //   const client = await pool.connect()
+    //   const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY "ID" ASC LIMIT 100');
+    //   const results = { 'results': (result) ? result.rows : null};
+      
+    //   res.send(JSON.stringify(results));
+    //   client.release();
+    // } 
+    // catch (err) 
+    // {
+    //   console.error(err);
+    //   res.send("Error " + err);
+    // }
+
+    // db.all(query1, function(err)
+    // {
+    //     if(err)
+    //     {
+    //         console.log('*** Error serving querying database. ' + err);
+    //     }
+    //     else
+    //     {
+    //         console.log("Successful post of data"); 
+    //     }
+    // });
+	
+	
+	// db.all(query2, function(err,ribos)
+	// {
+	// 	console.log(ribos);
+	// 	if(ribos!=null)
+	// 	{
+			
+	// 		if(ribos[0].Min_Temp != null && ribos[0].Max_Temp != null)
+	// 		{
+	// 			console.log("3");
+	// 			var min = ribos[0].Min_Temp;
+	// 			var max = ribos[0].Max_Temp;
+	// 			res.format ({'text/plain': function() {res.send(`RESPONSE;min:${min}; max:${max};RESPONSE`)}});
+	// 			console.log("3.5");
+	// 		}	
+	// 		console.log("4");			
+	// 	}
+	// 	else
+	// 	{
+	// 		console.log("5");
+	// 		res.format ({'text/plain': function() {res.send(`RESPONSE;min:20; max:24;RESPONSE`)}});
+	// 		console.log("6");
+	// 	}
+	// 	console.log("7");
 		
-	});
+	// });
 });
 
 
