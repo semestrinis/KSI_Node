@@ -30,8 +30,10 @@ router.post('/newmat1', async(req, res) =>
 	//querry1
 	try 
     {
+		console.log("pre q1");
 		const client = await pool.connect()
 		const result = await client.query(query1);
+		console.log("q1 done");
     } 
     catch (err) 
     {
@@ -50,13 +52,22 @@ router.post('/newmat1', async(req, res) =>
 			console.log("3");
 			var min = results[0].Min_Temp;
 			var max = results[0].Max_Temp;
-			res.format ({'text/plain': function() {res.send(`RESPONSE;min:${min}; max:${max};RESPONSE`)}});
+			res.format ({'text/plain': function()
+			{
+				res.send(`RESPONSE;min:${min}; max:${max};RESPONSE`)
+			}});
 			console.log("3.5");
 		}	
 		else
 		{
 			console.log("5");
-			res.format ({'text/plain': function() {res.send(`RESPONSE;min:20; max:24;RESPONSE`)}});
+			res.format (
+			{
+				'text/plain': function() 
+				{
+					res.send(`RESPONSE;min:20; max:24;RESPONSE`)
+				}
+			});
 			console.log("6");
 		}
     } 
