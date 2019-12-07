@@ -41,6 +41,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     next();
 // });
 
+
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+
 /*** route aprasymas ***/
 app.use('/', routes);
 app.use('/aboutUs', aboutUs);
