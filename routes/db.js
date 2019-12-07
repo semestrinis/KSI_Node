@@ -19,12 +19,14 @@ router.get('/', function(req, res)
 module.exports = router;
 
 
-router.get('/db', async (req, res) => {
+router.get('/db', async (req, res) => 
+{
     try 
     {
       const client = await pool.connect()
       const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY "ID" ASC LIMIT 100');
       const results = { 'results': (result) ? result.rows : null};
+      
       res.send(JSON.stringify(results));
       client.release();
     } 
