@@ -16,7 +16,7 @@ router.get('/', function(req, res)
 
 });
 
-router.get('/getAllData', function(req, res) 
+router.get('/getAllData', async(req, res) =>
 {
 	// var db = req.db;
 	// db.all('SELECT * FROM "Matavimai", "Ribos";', function(err,matavimas)
