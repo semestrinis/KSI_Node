@@ -23,9 +23,9 @@ router.post('/newmat1', async(req, res) =>
 	var presure = req.body.presure;
 	var light = req.body.light;
     
-    var query1 = `INSERT INTO "Matavimai" ("Temperatura1", "Temperatura2", "Dregme", "Slegis", "Sviesa", "Data") VALUES ( ${temp1} , ${temp2} , ${humidity}, ${presure},${light}, NOW();`;
+    var query1 = `INSERT INTO "Matavimai" ("Temperatura1", "Temperatura2", "Dregme", "Slegis", "Sviesa", "Data") VALUES ( ${temp1} , ${temp2} , ${humidity}, ${presure},${light}, NOW()`;
     console.log(query1);
-	var query2 = 'SELECT * FROM "Ribos" ORDER BY "ID" DESC LIMIT 1;';
+	var query2 = 'SELECT * FROM "Ribos" ORDER BY "ID" DESC LIMIT 1';
 	
 	//querry1
 	try 
