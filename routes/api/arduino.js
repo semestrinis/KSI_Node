@@ -47,6 +47,7 @@ router.post('/newmat1', async(req, res) =>
 		const client = await pool.connect()
 		const result = await client.query(query2);
 		const results = { 'results': (result) ? result.rows : null};
+		console.log(results);
 		if(results[0].Min_Temp != null && results[0].Max_Temp != null)
 		{
 			console.log("3");
