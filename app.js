@@ -12,6 +12,7 @@ var dataView = require('./routes/dataView');
 var apiAndroid = require('./routes/api/android');
 var apiArduino = require('./routes/api/arduino');
 var debug = require('./routes/api/debug');
+var testPg = require('./routes/api/testPg');
 var app = express();
 
 const { Client } = require('pg')
@@ -47,6 +48,7 @@ app.use('/dataView', dataView);
 app.use('/api/android', apiAndroid);
 app.use('/api/arduino', apiArduino);
 app.use('/api/debug', debug);
+app.use('/api/testPg', testPg);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
