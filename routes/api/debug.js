@@ -18,18 +18,33 @@ router.get('/', function(req, res)
 
 router.get('/getAllData', function(req, res) 
 {
-	var db = req.db;
-	db.all('SELECT * FROM "Matavimai", "Ribos";', function(err,matavimas)
+	// var db = req.db;
+	// db.all('SELECT * FROM "Matavimai", "Ribos";', function(err,matavimas)
+    // {
+    //     if(err)
+    //     {
+    //         console.log('*** Error serving querying database. ' + err);
+    //     }
+    //     else
+    //     {
+	// 		res.json(matavimas);
+    //     }
+    // });
+
+    try 
     {
-        if(err)
-        {
-            console.log('*** Error serving querying database. ' + err);
-        }
-        else
-        {
-			res.json(matavimas);
-        }
-    });
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM "Matavimai", "Ribos";');
+      const results = { 'results': (result) ? result.rows : null};
+      
+      res.send(JSON.stringify(results));
+      client.release();
+    } 
+    catch (err) 
+    {
+      console.error(err);
+      res.send("Error " + err);
+    }
 });
 
 router.get('/db', async (req, res) => 
