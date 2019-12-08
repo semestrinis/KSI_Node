@@ -29,8 +29,8 @@ EthernetClient client;
 //IPAddress server(192,168,1,102);
 //IPAddress server(52,23,225,52);//188.226.137.35
 //IPAddress server(99,80,174,196);
-//char server[] = "ksi-projektas.herokuapp.com";
-char server[] = "webhook.site";
+char server[] = "ksi-projektas.herokuapp.com";
+//char server[] = "webhook.site";
 
 unsigned long lastConnectionTime = 0;           // last time you connected to the server, in milliseconds
 const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
@@ -273,10 +273,10 @@ void httpRequest()
 
 
 
-//    client.println("POST /api/arduino/newmat1 HTTP/1.1");
-//    client.println("Host: ksi-projektas.herokuapp.com");
-    client.println("POST /2d3c6b5c-b08a-48de-ab81-378204bf5781 HTTP/1.1");
-    client.println("Host: webhook.site");
+    client.println("POST /api/arduino/newmat1 HTTP/1.1");
+    client.println("Host: ksi-projektas.herokuapp.com");
+//    client.println("POST /2d3c6b5c-b08a-48de-ab81-378204bf5781 HTTP/1.1");
+//    client.println("Host: webhook.site");
     client.println("User-Agent: AplinkosOroStebejimoStotele_1.1");
     client.println("Connection: close");
     client.println("Content-Type: application/x-www-form-urlencoded;");
