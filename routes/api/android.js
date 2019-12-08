@@ -7,7 +7,7 @@ const pool = new Pool({
   ssl: true
 });
 
-router.get('/get', function(req, res) 
+router.get('/get', async(req, res) =>
 {
     try 
     {
