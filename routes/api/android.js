@@ -9,41 +9,53 @@ const client = new Client({
 
 router.get('/get', function(req, res) 
 {
-    client.connect();
+    try 
+    {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM "Matavimai", "Ribos" ORDER BY "ID" ASC LIMIT 1;');
+      const results = { 'results': (result) ? result.rows : null};
+      
+      res.send(JSON.stringify(results));
+      client.release();
+    } 
+    catch (err) 
+    {
+      console.error(err);
+      res.send("Error " + err);
+    }
 
-    client.query('SELECT * FROM Matavimai, Ribos ORDER BY ID ASC LIMIT 1;', (err, res) =>
-     {
-        if (err) 
-        {
-            throw err;
-        }
-        for (let row of res.rows)
-        {
-          console.log(JSON.stringify(row));
-        }
-        client.end();
-      });
+    // client.connect();
 
-
-
-
-
-
-
-
-
-	//var db = req.db;
-	// db.all('SELECT * FROM Matavimai, Ribos ORDER BY ID ASC LIMIT 1;', function(err,matavimas)
-    // {
-    //     if(err)
+    // client.query('SELECT * FROM "Matavimai", "Ribos" ORDER BY "ID" ASC LIMIT 1;', (err, res) =>
+    //  {
+    //     if (err) 
     //     {
-    //         console.log('*** Error serving querying database. ' + err);
+    //         throw err;
     //     }
-    //     else
+    //     for (let row of res.rows)
     //     {
-	// 		res.json(matavimas);
+    //       console.log(JSON.stringify(row));
     //     }
-    // });
+    //     client.end();
+    //   });
+});
+
+router.post('/getAllData', async(req, res) =>
+{
+    try 
+    {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM "Matavimai", "Ribos";');
+      const results = { 'results': (result) ? result.rows : null};
+      
+      res.send(JSON.stringify(results));
+      client.release();
+    } 
+    catch (err) 
+    {
+      console.error(err);
+      res.send("Error " + err);
+    }
 });
 
 module.exports = router;
