@@ -6,7 +6,7 @@ router.get('/', function(req, res)
 {
     //ar db = req.db;
 
-    res.render('aboutUs', { title: 'Apie mus'});
+    res.render('aboutUs', { title: 'Apie projektą'});
 
 });
 

@@ -5,3 +5,40 @@ block content
 		div(class="row")
 			div(class="col-md-8")
 				h1= title
+		div(class="row move-down")
+			div(class="col-md-8")
+				a(href="/", class="btn btn-primary", role="button")
+					span(class="glyphicon glyphicon-list")
+					|  Grįžti
+		div(class="row move-down")
+			table.table
+				thead
+					tr
+					th(scope='col') Temperatūra
+					th(scope='col') Slėgis
+					th(scope='col') Drėgnis
+					th(scope='col') Šviesa
+					th(scope='col') Laikas
+				tbody
+					tr
+						each temp, dregnis, slegis, sviesa, laikas in {data}
+					td temp
+					td dregnis
+					td slegis
+					td sviesa
+					td laikas
+					tr
+					th(scope='row') 2
+					td Jacob
+					td Thornton
+					td @fat
+					td 12:45:00
+					tr
+					th(scope='row') 3
+					td Larry
+					td the Bird
+					td @twitter
+					td 12:45:00
+
+
+			
