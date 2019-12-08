@@ -18,19 +18,6 @@ router.get('/', function(req, res)
 
 router.get('/getAllData', async(req, res) =>
 {
-	// var db = req.db;
-	// db.all('SELECT * FROM "Matavimai", "Ribos";', function(err,matavimas)
-    // {
-    //     if(err)
-    //     {
-    //         console.log('*** Error serving querying database. ' + err);
-    //     }
-    //     else
-    //     {
-	// 		res.json(matavimas);
-    //     }
-    // });
-
     try 
     {
       const client = await pool.connect()
