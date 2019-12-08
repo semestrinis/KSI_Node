@@ -122,19 +122,19 @@ void loop()
 //    Serial.print("\n");
 
     String tempMin = "";
-    tempMin += response[response.indexOf("RESPONSE;min:")+13];// + response[response.indexOf("RESPONSE;min:")+13];
-    tempMin += response[response.indexOf("RESPONSE;min:")+14];
-    if(response[response.indexOf("RESPONSE;min:")+15] != ";")
+    tempMin += response[response.indexOf("Min_Temp\": ")+12];// + response[response.indexOf("RESPONSE;min:")+13];
+    tempMin += response[response.indexOf("Min_Temp\": ")+13];
+    if(response[response.indexOf("RESPONSE;min:")+14] != ",")
     {
-      tempMin += response[response.indexOf("RESPONSE;min:")+15];
+      tempMin += response[response.indexOf("Min_Temp\": ")+14];
     }
     
     String tempMax = "";
-    tempMax += response[response.indexOf("; max:")+6];// + response[response.indexOf("; max:")+8];
-    tempMax += response[response.indexOf("; max:")+7];
-    if(response[response.indexOf("; max:")+8] != ";")
+    tempMin += response[response.indexOf("Max_Temp\": ")+12];// + response[response.indexOf("RESPONSE;min:")+13];
+    tempMin += response[response.indexOf("Max_Temp\": ")+13];
+    if(response[response.indexOf("Max_Temp\": ")+14] != ",")
     {
-      tempMax += response[response.indexOf("; max:")+5];
+      tempMax += response[response.indexOf("Max_Temp\": ")+14];
     }
 
 //    Serial.print("\n");

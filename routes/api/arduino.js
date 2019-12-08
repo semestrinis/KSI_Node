@@ -15,8 +15,8 @@ router.get('/', function(req, res)
 
 router.post('/newmat1', async(req, res) =>
 {
-    var db = req.db;
-    
+    //var db = req.db;
+    console.log(req);
     var temp1 = req.body.temperature1;
 	var humidity = req.body.humidity;
 	var temp2 = req.body.temperature2;
