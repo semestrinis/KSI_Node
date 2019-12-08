@@ -16,13 +16,13 @@ router.get('/', function(req, res)
 router.post('/newmat1', async(req, res) =>
 {
     //var db = req.db;
-    console.log(req);
+    //console.log(req);
     var temp1 = req.body.temperature1;
 	var humidity = req.body.humidity;
 	var temp2 = req.body.temperature2;
 	var presure = req.body.presure;
 	var light = req.body.light;
-    
+
     var query1 = `INSERT INTO "Matavimai" ("Temperatura1", "Temperatura2", "Dregme", "Slegis", "Sviesa", "Data") VALUES ( ${temp1} , ${temp2} , ${humidity}, ${presure},${light}, NOW());`;
     console.log(query1);
 	var query2 = 'SELECT * FROM "Ribos" ORDER BY "ID" DESC LIMIT 1;';
