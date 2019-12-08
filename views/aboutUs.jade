@@ -1,8 +1,23 @@
-extends layout
+doctype html
+html
+  head
+    meta(http-equiv='X-UA-Compatible', content='IE=9; text/html; charset=utf-8')
+    |         
+    title Demo projektas
+    |         
+    link(href='/site.css', rel='stylesheet', type='text/css')
+    |     
+    title About us
+  body
+    h1 Apie projekta
+    |   &#x9;
+    center
+      h2
+        | Arduino oro steb&edot;jimo stotel&edot;. Stotel&edot;s moduliai:
+        | * Oro dr&edot;gm&edot;s,
+        | * Oro temperat&umacr;ros,
+        | * Oro barometrinio sl&edot;gio,
+        | * Indikaciniai led&apos;ai.
+        | Arduino siun&ccaron;ia oro s&aogon;lyg&uogon; duomenis &iogon; Node server&iogon; kuriame b&umacr;t&uogon; saugomi vis&uogon; steb&edot;jim&uogon; duomenys. Arduino, indikacini&uogon; led&apos;&uogon; pagalba atvaizduoja, oro temperat&umacr;ros reik&scaron;mes spalvomis (raudona, &zcaron;alia.. ) Arduino gali priimti siun&ccaron;iamas u&zcaron;klausas, taip nustatomos reik&scaron;m&edot;s pagal kurias atvaizduojama spalvomis. Android - Web serverio klientas gauna oro steb&edot;jim&uogon; duomenis, juos atvaizduoja,  gali si&uogon;sti u&zcaron;klausas &iogon; server&iogon; taip nustatant indikacini&uogon; led&apos;&uogon; ribas.  Node - serveris skirtas kaip tarpin&edot; jungtis tarp Arduino ir Androido, saugo i&scaron; Arduino gautus duomenis, nustato (siun&ccaron;ia HTTP u&zcaron;klausas) Arduino indikacini&uogon; led&apos;&uogon; rib&uogon; nustatymui, pateikia steb&edot;jim&uogon; duomenis Androidui, gauna i&scaron; jo nustatym&uogon; pakeitimus.
 
-block content
-	div(class="container")
-		div(class="row")
-			div(class="col-md-8")
-				h1= title
-				h1=ddsaa
+				
