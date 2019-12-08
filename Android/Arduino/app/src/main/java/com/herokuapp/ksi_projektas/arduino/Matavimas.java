@@ -7,7 +7,7 @@ public class Matavimas {
     public double Dregme;
     public double Slegis;
     public double Sviesa;
-    public double Data;
+    public String Data;
     public double Min_Temp;
     public double Max_Temp;
 

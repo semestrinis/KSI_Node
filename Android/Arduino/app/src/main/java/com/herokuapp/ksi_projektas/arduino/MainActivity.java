@@ -97,11 +97,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             TextView text_refresh_time = findViewById(R.id.text_refresh_time);
             Button spalva = findViewById(R.id.button_spalva);
 
-            text_temp_value.setText("-" + matavimas.Temperatura2);
+            text_temp_value.setText("" + matavimas.Temperatura2);
             Log.d("test","temp:" + matavimas.Temperatura2);
-            text_pressure_value.setText("-" + matavimas.Slegis);
-            text_humidity_value.setText("-" + matavimas.Dregme);
-            text_light_value.setText("-" + matavimas.Sviesa);
+            text_pressure_value.setText("" + matavimas.Slegis);
+            text_humidity_value.setText("" + matavimas.Dregme);
+            text_light_value.setText("" + matavimas.Sviesa);
             text_ribos_value.setText("Nuo " + matavimas.Min_Temp + " iki " + matavimas.Max_Temp);
 
             Date now = Calendar.getInstance().getTime();
