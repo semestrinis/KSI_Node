@@ -48,29 +48,29 @@ router.post('/newmat1', async(req, res) =>
 		const result = await client.query(query2);
 		const results = { 'results': (result) ? result.rows : null};
 		console.log(results);
-		if(results[0].Min_Temp != null && results[0].Max_Temp != null)
-		{
-			console.log("3");
-			var min = results[0].Min_Temp;
-			var max = results[0].Max_Temp;
-			res.format ({'text/plain': function()
-			{
-				res.send(`RESPONSE;min:${min}; max:${max};RESPONSE`)
-			}});
-			console.log("3.5");
-		}	
-		else
-		{
-			console.log("5");
-			res.format (
-			{
-				'text/plain': function() 
-				{
-					res.send(`RESPONSE;min:20; max:24;RESPONSE`)
-				}
-			});
-			console.log("6");
-		}
+		// if(results[0].Min_Temp != null && results[0].Max_Temp != null)
+		// {
+		// 	console.log("3");
+		// 	var min = results[0].Min_Temp;
+		// 	var max = results[0].Max_Temp;
+		// 	res.format ({'text/plain': function()
+		// 	{
+		// 		res.send(`RESPONSE;min:${min}; max:${max};RESPONSE`)
+		// 	}});
+		// 	console.log("3.5");
+		// }	
+		// else
+		// {
+		// 	console.log("5");
+		// 	res.format (
+		// 	{
+		// 		'text/plain': function() 
+		// 		{
+		// 			res.send(`RESPONSE;min:20; max:24;RESPONSE`)
+		// 		}
+		// 	});
+		// 	console.log("6");
+		// }
     } 
     catch (err) 
     {
