@@ -40,12 +40,16 @@ router.get('/get', function(req, res)
     //   });
 });
 
-router.post('/getAllData', async(req, res) =>
+router.post('/ribos', async(req, res) =>
 {
+    var temp1 = req.body.nuo;
+    var temp1 = req.body.iki;
+
+
     try 
     {
       const client = await pool.connect()
-      const result = await client.query('SELECT * FROM "Matavimai", "Ribos";');
+      const result = await client.query('SELECT * FROM "Ribos";');
       const results = { 'results': (result) ? result.rows : null};
       
       res.send(JSON.stringify(results));
