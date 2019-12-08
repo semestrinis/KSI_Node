@@ -15,7 +15,7 @@ router.get('/get', async(req, res) =>
       const result = await client.query('SELECT * FROM public."Matavimai", public."Ribos" ORDER BY public."Matavimai"."ID" ASC LIMIT 1;');
       const results = { 'results': (result) ? result.rows : null};
       
-      res.send(JSON.stringify(results[0]));
+      res.send(JSON.stringify(results));
       client.release();
     } 
     catch (err) 
