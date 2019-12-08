@@ -42,10 +42,12 @@ router.get('/get', function(req, res)
 
 router.post('/ribos', async(req, res) =>
 {
-    var temp1 = req.body.nuo;
-    var temp1 = req.body.iki;
+    var tempFrom = req.body.nuo;
+    var tempTo = req.body.iki;
 
-
+    console.log(tempFrom);
+    console.log(tempTo);
+    
     try 
     {
       const client = await pool.connect()
