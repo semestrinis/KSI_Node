@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "MainActivity";
     private Button Button_Refresh;
+    private Button Button_new_ribos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Button_Refresh = findViewById(R.id.button_refresh);
         Button_Refresh.setOnClickListener(this);
+
+        Button_new_ribos = findViewById(R.id.button_new_ribos);
+        Button_new_ribos.setOnClickListener(this);
     }
 
 
@@ -43,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.button_refresh: {
                 gautiDuomenis();
+            }
+            case R.id.button_new_ribos: {
+                Intent myIntent = new Intent(this, RibosActivity.class);
+                startActivity(myIntent);
             }
         }
     }

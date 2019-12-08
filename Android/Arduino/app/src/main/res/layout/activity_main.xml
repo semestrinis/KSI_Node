@@ -108,7 +108,7 @@
 
     <Button
         android:id="@+id/button_refresh"
-        android:layout_width="wrap_content"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -135,5 +135,15 @@
         android:background="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_ribos_name" />
+
+    <Button
+        android:id="@+id/button_new_ribos"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Keisti ribas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_refresh_time" />
 
 </android.support.constraint.ConstraintLayout>

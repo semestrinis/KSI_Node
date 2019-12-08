@@ -30,4 +30,11 @@ public class DataAPI {
         }
         return matavimai;
     }
+    public static void atnaujintiRibas(String RestURL, String Nuo, String Iki) throws Exception
+    {
+
+        WebAPI.atnaujintiRibas(RestURL, Nuo, Iki);
+
+    }
+
 }
