@@ -40,7 +40,7 @@ router.post('/newmat1', async(req, res) =>
     catch (err) 
     {
 		console.error(err);
-		//res.send("Error " + err);
+		res.send("Error " + err);
 	}
 	console.log("Querry 1 Done");
 	//querry2
@@ -78,7 +78,7 @@ router.post('/newmat1', async(req, res) =>
     catch (err) 
     {
 		console.error(err);
-		//res.send("Error " + err);
+		res.send("Error " + err);
 	}
 	
 
