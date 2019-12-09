@@ -241,9 +241,9 @@ void httpRequest()
     //PostData += itemID + ",";
 
 
-//    PostData += "\"Temperature1\":\"";
+//    PostData += "{\"Temperature1\":";
 //    PostData += temperature1;
-//    PostData += "\",\"Humidity\":";
+//    PostData += ",\"Humidity\":";
 //    PostData += humidity;
 //    PostData += ",\"Presure\":";
 //    PostData += presure;
@@ -251,6 +251,7 @@ void httpRequest()
 //    PostData += temperature2;
 //    PostData += ",\"Ligth\":";
 //    PostData += Ligth;
+//    PostData += "}";
 
     PostData = "temperature1=";
     PostData += temperature1;    
@@ -275,15 +276,14 @@ void httpRequest()
 
     client.println("POST /api/arduino/newmat1 HTTP/1.1");
     client.println("Host: ksi-projektas.herokuapp.com");
-//    client.println("POST /2d3c6b5c-b08a-48de-ab81-378204bf5781 HTTP/1.1");
-//    client.println("Host: webhook.site");
-    client.println("User-Agent: AplinkosOroStebejimoStotele_1.1");
+    client.println("User-Agent: AplinkosOroStebejimoStotele_2.0");
     client.println("Connection: close");
-    client.println("Content-Type: application/x-www-form-urlencoded;");
-    client.println("Cache-Control: no-cache");
-    client.println("Accept: */*;");
+    client.println("Content-Type: application/x-www-form-urlencoded;");   
+//    client.println("POST /2d3c6b5c-b08a-48de-ab81-378204bf5781 HTTP/1.1");
     client.println("Accept-Encoding: gzip, deflate;");
-    client.println("Content-Type: application/x-www-form-urlencoded;");
+////    client.println("Host: webhook.site");
+    client.println("Cache-Control: no-cache");
+    client.println("Accept: */*");
     client.print("Content-Length: ");
     client.println(PostData.length());
     client.println();
