@@ -7,8 +7,6 @@ const pool = new Pool({
   ssl: true
 });
 
-express.use(bodyParser.urlencoded({ extended: true }));
-
 router.get('/', function(req, res) 
 {
     var db = req.db;
