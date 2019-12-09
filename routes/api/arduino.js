@@ -13,7 +13,7 @@ router.get('/', function(req, res)
     
 });
 
-router.post('/newmat1', function(req, res) 
+router.post('/newmat1', async(req, res) => 
 {
     //var db = req.db;
 	// console.log(req);
