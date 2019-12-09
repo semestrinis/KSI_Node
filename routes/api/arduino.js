@@ -18,7 +18,7 @@ router.post('/newmat1', async(req, res) =>
     //var db = req.db;
 	// console.log(req);
 	console.log(req);
-	console.log(req.body.temperature1);
+	//console.log(req.body.temperature1);
     var temp1 = req.body.temperature1;
 	var humidity = req.body.humidity;
 	var temp2 = req.body.temperature2;
@@ -40,7 +40,7 @@ router.post('/newmat1', async(req, res) =>
     catch (err) 
     {
 		console.error(err);
-		res.send("Error " + err);
+		//res.send("Error " + err);
 	}
 	console.log("Querry 1 Done");
 	//querry2
@@ -78,7 +78,7 @@ router.post('/newmat1', async(req, res) =>
     catch (err) 
     {
 		console.error(err);
-		res.send("Error " + err);
+		//res.send("Error " + err);
 	}
 	
 

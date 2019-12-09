@@ -287,7 +287,7 @@ void httpRequest()
     client.print("Content-Length: ");
     client.println(PostData.length());
     client.println();
-    client.println(PostData);
+    client.print(PostData);
 //    client.println("temperature1=");
 //    client.print(temperature1);
 //    client.println("");
@@ -296,11 +296,11 @@ void httpRequest()
 //    client.println();
 //    client.println("humidity=");
 //    client.println(humidity);
-    client.println();
+    //client.println();
 
     
     
-    client.println();
+    //client.println();
 
 
 //    String PostData1 = "temperature1=";
@@ -315,7 +315,7 @@ void httpRequest()
 //    PostData += Ligth;
     
     //client.println("Data: someRandom data");
-    client.println();
+    //client.println();
 
     // note the time that the connection was made:
     lastConnectionTime = millis();
