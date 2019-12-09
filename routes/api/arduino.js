@@ -15,6 +15,8 @@ router.get('/', function(req, res)
 
 router.post('/newmat1', async(req, res) =>
 {
+	console.log('body: ', req.body)
+	console.log('query: ', req.query)
     //var db = req.db;
 	// console.log(req);
 	//console.log(req);
