@@ -7,6 +7,8 @@ const pool = new Pool({
   ssl: true
 });
 
+express.use(bodyParser.urlencoded({ extended: true }));
+
 router.get('/', function(req, res) 
 {
     var db = req.db;
@@ -15,8 +17,6 @@ router.get('/', function(req, res)
 
 router.post('/newmat1', async(req, res) =>
 {
-	console.log('body: ', req.body)
-	console.log('query: ', req.query)
     //var db = req.db;
 	// console.log(req);
 	//console.log(req);
