@@ -1,5 +1,32 @@
+// var express = require('express');
+// var router = express.Router();
+
+// router.get('/getAllData', function(req, res) 
+// {
+// 	var db = req.db;
+// 	db.all('SELECT * FROM Matavimai, Ribos;', function(err,matavimas)
+//     {
+//         if(err)
+//         {
+//             console.log('*** Error serving querying database. ' + err);
+//         }
+//         else
+//         {
+// 			res.json(matavimas);
+//         }
+//     });
+// });
+
+// module.exports = router;
+
 var express = require('express');
 var router = express.Router();
+const {Client} = require('pg');
+
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+});
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -10,6 +37,7 @@ const pool = new Pool({
 /* GET home page. */
 router.get('/', function(req, res) 
 {
+
     //ar db = req.db;
 
     res.render('aboutUs', { title: 'Apie mus'});
@@ -32,6 +60,7 @@ router.get('/getAllData', async(req, res) =>
       console.error(err);
       res.send("Error " + err);
     }
+
 });
 
 router.get('/db', async (req, res) => 
