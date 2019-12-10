@@ -13,7 +13,7 @@ router.get('/', async(req, res) =>
 {
     try 
     {
-      const rezultatas = "";
+      var rezultatas = "";
       const client = await pool.connect()
       const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY "ID" DESC LIMIT 1;');
       const result1 = await client.query('SELECT * FROM public."Ribos" ORDER BY "ID" DESC LIMIT 1;');
