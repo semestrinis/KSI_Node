@@ -161,7 +161,8 @@ void loop()
 //    Serial.print("\n");
 //    Serial.print(response[response.indexOf("RESPONSE;min:")+13]);
 //    Serial.print("\n");
-    delay(2000);
+    Serial.println("delay hit");
+    delay(40000);
     httpRequest();
     response = "";
   }
