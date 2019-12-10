@@ -15,11 +15,8 @@ router.get('/', function(req, res)
 
 router.post('/newmat1', async(req, res) => 
 {
-    //var db = req.db;
-	// console.log(req);
-	//console.log(req);
 	console.log(req.body);
-	console.log(req.body.temperature1);
+	//console.log(req.body.temperature1);
     var temp1 = req.body.temperature1;
 	var humidity = req.body.humidity;
 	var temp2 = req.body.temperature2;
@@ -50,7 +47,6 @@ router.post('/newmat1', async(req, res) =>
 		const client = await pool.connect()
 		const result = await client.query(query2);
 		const results = { 'results': (result) ? result.rows : null};
-		//console.log(results);
 		res.send(results);
 		// if(results[0].Min_Temp != null && results[0].Max_Temp != null)
 		// {
@@ -81,61 +77,6 @@ router.post('/newmat1', async(req, res) =>
 		console.error(err);
 		res.send("Error " + err);
 	}
-	
-
-	// try 
-    // {
-    //   const client = await pool.connect()
-    //   const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY "ID" ASC LIMIT 100');
-    //   const results = { 'results': (result) ? result.rows : null};
-      
-    //   res.send(JSON.stringify(results));
-    //   client.release();
-    // } 
-    // catch (err) 
-    // {
-    //   console.error(err);
-    //   res.send("Error " + err);
-    // }
-
-    // db.all(query1, function(err)
-    // {
-    //     if(err)
-    //     {
-    //         console.log('*** Error serving querying database. ' + err);
-    //     }
-    //     else
-    //     {
-    //         console.log("Successful post of data"); 
-    //     }
-    // });
-	
-	
-	// db.all(query2, function(err,ribos)
-	// {
-	// 	console.log(ribos);
-	// 	if(ribos!=null)
-	// 	{
-			
-	// 		if(ribos[0].Min_Temp != null && ribos[0].Max_Temp != null)
-	// 		{
-	// 			console.log("3");
-	// 			var min = ribos[0].Min_Temp;
-	// 			var max = ribos[0].Max_Temp;
-	// 			res.format ({'text/plain': function() {res.send(`RESPONSE;min:${min}; max:${max};RESPONSE`)}});
-	// 			console.log("3.5");
-	// 		}	
-	// 		console.log("4");			
-	// 	}
-	// 	else
-	// 	{
-	// 		console.log("5");
-	// 		res.format ({'text/plain': function() {res.send(`RESPONSE;min:20; max:24;RESPONSE`)}});
-	// 		console.log("6");
-	// 	}
-	// 	console.log("7");
-		
-	// });
 });
 
 
