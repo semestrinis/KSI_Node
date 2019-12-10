@@ -29,7 +29,9 @@ EthernetClient client;
 //IPAddress server(192,168,1,102);
 //IPAddress server(52,23,225,52);//188.226.137.35
 //IPAddress server(99,80,174,196);
-char server[] = "ksi-projektas.herokuapp.com";
+//char server[] = "ksi-projektas.herokuapp.com";
+//char server[] = "stud.if.ktu.lt";
+char server[] = "webhook.site";
 
 unsigned long lastConnectionTime = 0;           // last time you connected to the server, in milliseconds
 const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
@@ -122,19 +124,19 @@ void loop()
 //    Serial.print("\n");
 
     String tempMin = "";
-    tempMin += response[response.indexOf("RESPONSE;min:")+13];// + response[response.indexOf("RESPONSE;min:")+13];
-    tempMin += response[response.indexOf("RESPONSE;min:")+14];
-    if(response[response.indexOf("RESPONSE;min:")+15] != ";")
+    tempMin += response[response.indexOf("Min_Temp\": ")+12];// + response[response.indexOf("RESPONSE;min:")+13];
+    tempMin += response[response.indexOf("Min_Temp\": ")+13];
+    if(response[response.indexOf("RESPONSE;min:")+14] != ",")
     {
-      tempMin += response[response.indexOf("RESPONSE;min:")+15];
+      tempMin += response[response.indexOf("Min_Temp\": ")+14];
     }
     
     String tempMax = "";
-    tempMax += response[response.indexOf("; max:")+6];// + response[response.indexOf("; max:")+8];
-    tempMax += response[response.indexOf("; max:")+7];
-    if(response[response.indexOf("; max:")+8] != ";")
+    tempMin += response[response.indexOf("Max_Temp\": ")+12];// + response[response.indexOf("RESPONSE;min:")+13];
+    tempMin += response[response.indexOf("Max_Temp\": ")+13];
+    if(response[response.indexOf("Max_Temp\": ")+14] != ",")
     {
-      tempMax += response[response.indexOf("; max:")+5];
+      tempMax += response[response.indexOf("Max_Temp\": ")+14];
     }
 
 //    Serial.print("\n");
@@ -159,7 +161,8 @@ void loop()
 //    Serial.print("\n");
 //    Serial.print(response[response.indexOf("RESPONSE;min:")+13]);
 //    Serial.print("\n");
-
+    Serial.println("delay hit");
+    delay(40000);
     httpRequest();
     response = "";
   }
@@ -226,12 +229,12 @@ void httpRequest()
     Serial.print(temperature2);
     Serial.println(" *C");
 
-    Serial.print("Pressure = ");
-    Serial.print(presure);
-    Serial.println(" Pa");
+    Serial.println("Pressure = ");
+    Serial.println(presure);
+    Serial.print(" Pa");
 
     uint16_t Ligth = LightSensor.GetLightIntensity();
-    Serial.print("Light: ");
+    Serial.println("Light: ");
     Serial.println(Ligth);
 
     Serial.println("connecting...");
@@ -240,9 +243,9 @@ void httpRequest()
     //PostData += itemID + ",";
 
 
-//    PostData += "\"Temperature1\":\"";
+//    PostData += "{\"Temperature1\":";
 //    PostData += temperature1;
-//    PostData += "\",\"Humidity\":";
+//    PostData += ",\"Humidity\":";
 //    PostData += humidity;
 //    PostData += ",\"Presure\":";
 //    PostData += presure;
@@ -250,41 +253,73 @@ void httpRequest()
 //    PostData += temperature2;
 //    PostData += ",\"Ligth\":";
 //    PostData += Ligth;
+//    PostData += "}";
 
-    PostData += "temperature1=";
+    PostData = "temperature1=";
     PostData += temperature1;    
-    PostData += "humidity=";
+    PostData += "&humidity=";
     PostData += humidity;
-    PostData += "temperature2=";
+    PostData += "&temperature2=";
     PostData += temperature2;
-    PostData += "presure=";
+    PostData += "&presure=";
     PostData += presure;
-    PostData += "light=";
+    PostData += "&light=";
     PostData += Ligth;
 
 
-    
-
-    PostData += "}";
+    //String strTemp1 = "";
+    //strTemp1 += temperature1;
+    //strTemp1 += "}";
+    //Serial.println(strTemp1);
+    //PostData += "}";
     Serial.println(PostData);
 
 
-
-    client.println("POST /api/arduino/newmat1 HTTP/1.1");
-    client.println("Host: ksi-projektas.herokuapp.com");
-    client.println("User-Agent: AplinkosOroStebejimoStotele_1.1");
+//    client.println("POST /~nedzil/post_temp.php HTTP/1.1");
+//    client.println("Host: stud.if.ktu.lt");
+//    client.println("POST /api/arduino/newmat1 HTTP/1.1");
+//    client.println("Host: ksi-projektas.herokuapp.com");
+    client.println("POST /2d3c6b5c-b08a-48de-ab81-378204bf5781 HTTP/1.1");
+    client.println("Host: webhook.site");
+    client.println("User-Agent: AplinkosOroStebejimoStotele_2.0");
     client.println("Connection: close");
-    client.println("Content-Type: application/x-www-form-urlencoded;");
-    client.println("Cache-Control: no-cache");
-    client.println("Accept: */*;");
+    client.println("Content-Type: application/x-www-form-urlencoded;");   
     client.println("Accept-Encoding: gzip, deflate;");
-    client.println("Content-Type: application/x-www-form-urlencoded;");
+    client.println("Cache-Control: no-cache");
+    //client.println("postman-token:  49806bf0-79ae-4004-8849-ebab17a92c2a");
+    client.println("Accept: */*");
     client.print("Content-Length: ");
     client.println(PostData.length());
     client.println();
-    client.println(PostData);
+    client.print(PostData);
+//    client.println("temperature1=");
+//    client.print(temperature1);
+//    client.println("");
+//    client.println("humidity=");
+//    client.print(humidity);
+//    client.println();
+//    client.println("humidity=");
+//    client.println(humidity);
+    //client.println();
+
+    
+    
+    //client.println();
+
+
+//    String PostData1 = "temperature1=";
+//    PostData1 += temperature1;    
+//    PostData += "humidity=";
+//    PostData += humidity;
+//    PostData += "temperature2=";
+//    PostData += temperature2;
+//    PostData += "presure=";
+//    PostData += presure;
+//    PostData += "light=";
+//    PostData += Ligth;
+    
     //client.println("Data: someRandom data");
-    client.println();
+    //client.println();
 
     // note the time that the connection was made:
     lastConnectionTime = millis();

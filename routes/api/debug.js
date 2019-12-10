@@ -28,36 +28,57 @@ const client = new Client({
     ssl: true,
 });
 
-router.get('/getAllData', function(req, res) 
-{
-    client.connect();
-
-    client.query('SELECT * FROM Matavimai, Ribos;', (err, res) =>
-     {
-        if (err) 
-        {
-            throw err;
-        }
-        for (let row of res.rows)
-        {
-          console.log(JSON.stringify(row));
-        }
-        client.end();
-      });
-
-	//var db = req.db;
-	// db.all('SELECT * FROM Matavimai, Ribos ORDER BY ID ASC LIMIT 1;', function(err,matavimas)
-    // {
-    //     if(err)
-    //     {
-    //         console.log('*** Error serving querying database. ' + err);
-    //     }
-    //     else
-    //     {
-	// 		res.json(matavimas);
-    //     }
-    // });
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
 });
 
-module.exports = router;
+/* GET home page. */
+router.get('/', function(req, res) 
+{
 
+    //ar db = req.db;
+
+    res.render('aboutUs', { title: 'Apie mus'});
+
+});
+
+router.get('/getAllData', async(req, res) =>
+{
+    try 
+    {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM "Matavimai", "Ribos";');
+      const results = { 'results': (result) ? result.rows : null};
+      
+      res.send(JSON.stringify(results));
+      client.release();
+    } 
+    catch (err) 
+    {
+      console.error(err);
+      res.send("Error " + err);
+    }
+
+});
+
+router.get('/db', async (req, res) => 
+{
+    try 
+    {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY "ID" ASC LIMIT 100');
+      const results = { 'results': (result) ? result.rows : null};
+      
+      res.send(JSON.stringify(results));
+      client.release();
+    } 
+    catch (err) 
+    {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+
+module.exports = router;
