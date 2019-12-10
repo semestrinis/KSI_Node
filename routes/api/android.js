@@ -36,7 +36,7 @@ router.post('/ribos', async(req, res) =>
     try 
     {
       const client = await pool.connect()
-      const result = await client.query('SELECT * FROM "Ribos";');
+      const result = await client.query('UPDATE public."Ribos" SET "Min_Temp" = '+tempFrom+', "Max_Temp" = '+tempTo+' WHERE "ID" = 1;');
       const results = { 'results': (result) ? result.rows : null};
       
       res.send(JSON.stringify(results));
