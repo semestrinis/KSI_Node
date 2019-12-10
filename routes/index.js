@@ -23,11 +23,11 @@ router.get('/', async(req, res) =>
       {
         rezultatas = "Pats tas";
       }
-      else if(results[0].Temperatura1 > results1[0].Max_Temp)
+      else if(result.Temperatura1 > result1.Max_Temp)
       {
         rezultatas = "Per karsta, kolegos";
       }
-      else if(results[0].Temperatura1 < results1[0].Min_Temp)
+      else if(result.Temperatura1 < result1.Min_Temp)
       {
         rezultatas = "Tadai, lysk jau lauk is saldytuvo";
       }
