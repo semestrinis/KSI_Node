@@ -47,11 +47,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.button_refresh: {
                 gautiDuomenis();
+                break;
             }
             case R.id.button_new_ribos: {
                 Intent myIntent = new Intent(this, RibosActivity.class);
                 startActivity(myIntent);
+                break;
             }
+            default:
+                break;
         }
     }
 
