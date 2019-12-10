@@ -18,11 +18,16 @@ block content
 					th(scope='col') Slėgis
 					th(scope='col') Drėgnis
 					th(scope='col') Šviesa
-					th(scope='col') Laikas
+					th(scope='col') Data
 				tbody
 					tr
 						each val in data.results
 							td= val.Temperatura1
+							td= val.Slegis
+							td= val.Dregme
+							td= val.Sviesa
+							td= val.Data
+							tr
 					//- td temp
 					//- td dregnis
 					//- td slegis
