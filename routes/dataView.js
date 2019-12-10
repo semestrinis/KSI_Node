@@ -19,7 +19,7 @@ router.get('/', async(req, res) =>
       console.log(result);
       console.log(results);
       //res.send(JSON.stringify(results));
-      res.render('dataView', { title: "veliausi matavimai",data: results});
+      res.render('dataView', { title: "Veliausi matavimai",data: results});
       client.release();
     } 
     catch (err) 
