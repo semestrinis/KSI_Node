@@ -18,7 +18,7 @@ router.get('/', async(req, res) =>
       //const results = { 'results': (result) ? result.rows : null};
       console.log(result);
       //res.send(JSON.stringify(results));
-      res.render('dataView', { data: result['data']});
+      res.render('dataView', { title: "veliausi matavimai",data: result});
       client.release();
     } 
     catch (err) 

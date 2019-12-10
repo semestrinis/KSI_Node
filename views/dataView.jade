@@ -20,13 +20,14 @@ block content
 					th(scope='col') Šviesa
 					th(scope='col') Laikas
 				tbody
-					tr
-						each temp, dregnis, slegis, sviesa, laikas in {data}
+					ul
+						each U in data
+							li= U
 					td temp
-					td dregniscxb
-					td slegiscxv
-					td sviesacxv
-					td laikascvx
+					td dregnis
+					td slegis
+					td sviesa
+					td laikas
 					tr
 					th(scope='row') 2
 					td Jacob
