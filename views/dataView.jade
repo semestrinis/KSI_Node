@@ -20,9 +20,9 @@ block content
 					th(scope='col') Šviesa
 					th(scope='col') Laikas
 				tbody
-					ul
-						each val in data
-							li= val.Temperatura1
+					tr
+						each val in data.results
+							td= val.Temperatura1
 					//- td temp
 					//- td dregnis
 					//- td slegis
