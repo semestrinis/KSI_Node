@@ -20,26 +20,27 @@ block content
 					th(scope='col') Šviesa
 					th(scope='col') Laikas
 				tbody
-					ul
+					//- ul
+					tr
 						each U in data
-							li= U
-					td temp
-					td dregnis
-					td slegis
-					td sviesa
-					td laikas
-					tr
-					th(scope='row') 2
-					td Jacob
-					td Thornton
-					td @fat
-					td 12:45:00
-					tr
-					th(scope='row') 3
-					td Larry
-					td the Bird
-					td @twitter
-					td 12:45:00
+							td #{U.Temperatura1}
+					//- td temp
+					//- td dregnis
+					//- td slegis
+					//- td sviesa
+					//- td laikas
+					//- tr
+					//- th(scope='row') 2
+					//- td Jacob
+					//- td Thornton
+					//- td @fat
+					//- td 12:45:00
+					//- tr
+					//- th(scope='row') 3
+					//- td Larry
+					//- td the Bird
+					//- td @twitter
+					//- td 12:45:00
 
 
 			
