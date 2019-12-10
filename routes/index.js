@@ -15,8 +15,10 @@ router.get('/', async(req, res) =>
     {
       const client = await pool.connect()
       const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY "ID" DESC LIMIT 1;');
+      const result1 = await client.query('SELECT * FROM public."Ribos" ORDER BY "ID" DESC LIMIT 1;');
       const results = { 'results': (result) ? result.rows : null};
-      res.render('main', { title: "Veliausi matavimai",data: results});
+      const results1 = { 'results1': (result1) ? result1.rows : null};
+      res.render('main', { title: "Stotelės duomenys",data: results, data1: results1});
       client.release();
     } 
     catch (err) 
