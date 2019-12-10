@@ -15,10 +15,10 @@ router.get('/', async(req, res) =>
     {
       const client = await pool.connect()
       const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY public."Matavimai.ID" ASC LIMIT 10;');
-      const results = { 'results': (result) ? result.rows : null};
+      //const results = { 'results': (result) ? result.rows : null};
       
       res.send(JSON.stringify(results));
-      res.render('dataView', { data: res.rows});
+      res.render('dataView', { data: result[1][1]});
       client.release();
     } 
     catch (err) 
