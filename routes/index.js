@@ -9,13 +9,21 @@ const pool = new Pool({
 
 
 /* GET home page. */
-router.get('/', function(req, res) 
+router.get('/', async(req, res) => 
 {
-    //ar db = req.db;
-
-    res.render('main', { title: 'Oro stebėjimo stotelė'});
-
+    try 
+    {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY "ID" ASC LIMIT 10;');
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('main', { title: "Veliausi matavimai",data: results});
+      client.release();
+    } 
+    catch (err) 
+    {
+      console.error(err);
+      res.send("Error " + err);
+    }
 });
 
 module.exports = router;
-

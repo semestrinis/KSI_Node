@@ -27,26 +27,6 @@ router.get('/', async(req, res) =>
       console.error(err);
       res.send("Error " + err);
     }
-
-
-    // client.connect();
-
-    // client.query('SELECT * FROM public."Matavimai" ORDER BY public."Matavimai.ID" ASC LIMIT 10;', (err, res) =>
-    //  {
-    //     if (err) 
-    //     {
-    //         throw err;
-    //     }
-    //     //gal nereikia for (let row of res.rows)
-    //     //{
-    //       //console.log(JSON.stringify(row));
-    //       res.render('dataView', { data: res.rows});
-    //     //}
-    //     client.end();
-    //   });
-
-
-
 });
 
 module.exports = router;
