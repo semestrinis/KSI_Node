@@ -1,31 +1,51 @@
 var express = require('express');
 var router = express.Router();
-const {Client} = require('pg');
 
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
 });
 
 
 /* GET home page. */
-router.get('/getAllData', async(req, res) => 
+router.get('/', async(req, res) => 
 {
-    client.connect();
+    try 
+    {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM public."Matavimai" ORDER BY public."Matavimai.ID" ASC LIMIT 10;');
+      const results = { 'results': (result) ? result.rows : null};
+      
+      res.send(JSON.stringify(results));
+      res.render('dataView', { data: res.rows});
+      client.release();
+    } 
+    catch (err) 
+    {
+      console.error(err);
+      res.send("Error " + err);
+    }
 
-    client.query('SELECT * FROM public."Matavimai" ORDER BY public."Matavimai.ID" ASC LIMIT 10;', (err, res) =>
-     {
-        if (err) 
-        {
-            throw err;
-        }
-        //gal nereikia for (let row of res.rows)
-        //{
-          //console.log(JSON.stringify(row));
-          res.render('dataView', { data: res.rows});
-        //}
-        client.end();
-      });
+
+    // client.connect();
+
+    // client.query('SELECT * FROM public."Matavimai" ORDER BY public."Matavimai.ID" ASC LIMIT 10;', (err, res) =>
+    //  {
+    //     if (err) 
+    //     {
+    //         throw err;
+    //     }
+    //     //gal nereikia for (let row of res.rows)
+    //     //{
+    //       //console.log(JSON.stringify(row));
+    //       res.render('dataView', { data: res.rows});
+    //     //}
+    //     client.end();
+    //   });
+
+
+
 });
 
 module.exports = router;
