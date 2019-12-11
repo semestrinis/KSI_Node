@@ -19,12 +19,6 @@ router.get('/', async(req, res) =>
       const result1 = await client.query('SELECT * FROM public."Ribos" ORDER BY "ID" DESC LIMIT 1;');
       const results = { 'results': (result) ? result.rows : null};
       const results1 = { 'results1': (result1) ? result1.rows : null};
-      //console.log(result1[0].Min_Temp);
-      console.log(result.rows[0].Temperatura1);
-      // console.log(results[0].Temperatura1);
-      // console.log(result[0].Temperatura1);
-      // console.log(result.Temperatura1);
-      //console.log(result1[0].Max_Temp);
       if(result1.rows[0].Min_Temp > result.rows[0].Temperatura1 && result.rows[0].Temperatura1 < result1.rows[0].Max_Temp)
       {
         rezultatas = "Gerai";
@@ -39,7 +33,7 @@ router.get('/', async(req, res) =>
       }
       else
       {
-        rezultatas = "Kazkas negerai, gelbekit kolegos";
+        rezultatas = "Kazkas negerai";
       }
       res.render('main', { title: "Stotelės duomenys",data: results, data1: results1, rezultatas: rezultatas});
       
