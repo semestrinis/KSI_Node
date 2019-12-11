@@ -15,10 +15,10 @@ block content
 				h1 Arduino oro stebėjimo stotelė
 				h3
 					|	Stotelės moduliai:
-    				|	* Oro drėgmės,
-    				|	* Oro temperatūros,
-    				|	* Oro barometrinio slėgio,
-    				|	* Indikaciniai led'ai.
+    				|	*	Oro drėgmės,
+    				|	*	Oro temperatūros,
+    				|	*	Oro barometrinio slėgio,
+    				|	*	Indikaciniai led'ai.
     				|	Arduino siunčia oro sąlygų duomenis į Node serverį kuriame būtų saugomi visų stebėjimų duomenys. Arduino, indikacinių led'ų pagalba atvaizduoja, oro temperatūros reikšmes spalvomis (raudona, žalia.. ) Arduino gali priimti siunčiamas užklausas, taip nustatomos reikšmės pagal kurias atvaizduojama spalvomis. Android - Web serverio klientas gauna oro stebėjimų duomenis, juos atvaizduoja,  gali siųsti užklausas į serverį taip nustatant indikacinių led'ų ribas.  Node - serveris skirtas kaip tarpinė jungtis tarp Arduino ir Androido, saugo iš Arduino gautus duomenis, nustato (siunčia HTTP užklausas) Arduino indikacinių led'ų ribų nustatymui, pateikia stebėjimų duomenis Androidui, gauna iš jo nustatymų pakeitimus.
   				br
 				h3	Darbą atliko:
