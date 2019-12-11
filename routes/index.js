@@ -19,9 +19,9 @@ router.get('/', async(req, res) =>
       const result1 = await client.query('SELECT * FROM public."Ribos" ORDER BY "ID" DESC LIMIT 1;');
       const results = { 'results': (result) ? result.rows : null};
       const results1 = { 'results1': (result1) ? result1.rows : null};
-      console.log(result1.Min_Temp);
-      console.log(result.Temperatura1);
-      console.log(result1.Max_Temp);
+      console.log(result1[0].Min_Temp);
+      console.log(result[0].Temperatura1);
+      console.log(result1[0].Max_Temp);
       if(result1.Min_Temp > result.Temperatura1 && result.Temperatura1 < result1.Max_Temp)
       {
         rezultatas = "Pats tas";
