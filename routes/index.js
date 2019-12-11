@@ -27,15 +27,15 @@ router.get('/', async(req, res) =>
       //console.log(result1[0].Max_Temp);
       if(result1.rows[0].Min_Temp > result.rows[0].Temperatura1 && result.rows[0].Temperatura1 < result1.rows[0].Max_Temp)
       {
-        rezultatas = "Pats tas";
+        rezultatas = "Gerai";
       }
       else if(result.rows[0].Temperatura1 > result1.rows[0].Max_Temp)
       {
-        rezultatas = "Per karsta, kolegos";
+        rezultatas = "Karsta";
       }
       else if(result.rows[0].Temperatura1 < result1.rows[0].Min_Temp)
       {
-        rezultatas = "Tadai, lysk jau lauk is saldytuvo";
+        rezultatas = "Salta";
       }
       else
       {
