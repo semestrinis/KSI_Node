@@ -12,7 +12,7 @@ router.get('/get', async(req, res) =>
     try 
     {
       const client = await pool.connect()
-      const result = await client.query('SELECT * FROM public."Matavimai", public."Ribos" ORDER BY public."Matavimai"."ID" ASC LIMIT 1;');
+      const result = await client.query('SELECT * FROM public."Matavimai", public."Ribos" ORDER BY public."Matavimai"."ID" DSC LIMIT 1;');
       const results = { 'results': (result) ? result.rows : null};
       
       res.send(JSON.stringify(results));
