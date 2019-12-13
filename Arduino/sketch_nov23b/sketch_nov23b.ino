@@ -31,7 +31,8 @@ EthernetClient client;
 //IPAddress server(99,80,174,196);
 //char server[] = "ksi-projektas.herokuapp.com";
 //char server[] = "stud.if.ktu.lt";
-char server[] = "webhook.site";
+//char server[] = "webhook.site";
+char server[] = "releksi.000webhostapp.com";
 
 unsigned long lastConnectionTime = 0;           // last time you connected to the server, in milliseconds
 const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
@@ -118,41 +119,41 @@ void loop()
   // then connect again and send data:
   if (millis() - lastConnectionTime > postingInterval)
   {
-    //Serial.print(response);
+    Serial.print(response);
 //    Serial.print("\n");
 //    Serial.print(response.length());
 //    Serial.print("\n");
 
     String tempMin = "";
-    tempMin += response[response.indexOf("Min_Temp\": ")+12];// + response[response.indexOf("RESPONSE;min:")+13];
-    tempMin += response[response.indexOf("Min_Temp\": ")+13];
-    if(response[response.indexOf("RESPONSE;min:")+14] != ",")
+    tempMin += response[response.indexOf("Min_Temp\":")+11];// + response[response.indexOf("RESPONSE;min:")+13];
+    tempMin += response[response.indexOf("Min_Temp\":")+12];
+    if(response[response.indexOf("Min_Temp\":")+13] != ",")
     {
-      tempMin += response[response.indexOf("Min_Temp\": ")+14];
+      tempMin += response[response.indexOf("Min_Temp\": ")+13];
     }
     
     String tempMax = "";
-    tempMin += response[response.indexOf("Max_Temp\": ")+12];// + response[response.indexOf("RESPONSE;min:")+13];
-    tempMin += response[response.indexOf("Max_Temp\": ")+13];
-    if(response[response.indexOf("Max_Temp\": ")+14] != ",")
+    tempMin += response[response.indexOf("Max_Temp\":")+11];// + response[response.indexOf("RESPONSE;min:")+13];
+    tempMin += response[response.indexOf("Max_Temp\":")+12];
+    if(response[response.indexOf("Max_Temp\":")+13] != "}")
     {
-      tempMax += response[response.indexOf("Max_Temp\": ")+14];
+      tempMax += response[response.indexOf("Max_Temp\": ")+13];
     }
 
-//    Serial.print("\n");
-//    Serial.print(tempMin);
-//    Serial.print("\n");
-//    Serial.print(tempMax);
-//    Serial.print("\n");
+    Serial.println("\n");
+    Serial.println(tempMin);
+    Serial.println("\n");
+    Serial.println(tempMax);
+    Serial.println("\n");
     
     minTemp = tempMin.toInt();
     maxTemp = tempMax.toInt();
-
-//    Serial.print("\n");
-//    Serial.print(minTemp);
-//    Serial.print("\n");
-//    Serial.print(maxTemp);
-//    Serial.print("\n");
+//
+//    Serial.println("\n");
+//    Serial.println(minTemp);
+//    Serial.println("\n");
+//    Serial.println(maxTemp);
+//    Serial.println("\n");
 
     
 //    Serial.print(response.indexOf("RESPONSE;min:"));
@@ -279,8 +280,10 @@ void httpRequest()
 //    client.println("Host: stud.if.ktu.lt");
 //    client.println("POST /api/arduino/newmat1 HTTP/1.1");
 //    client.println("Host: ksi-projektas.herokuapp.com");
-    client.println("POST /2d3c6b5c-b08a-48de-ab81-378204bf5781 HTTP/1.1");
-    client.println("Host: webhook.site");
+//    client.println("POST /2d3c6b5c-b08a-48de-ab81-378204bf5781 HTTP/1.1");
+//    client.println("Host: webhook.site");
+    client.println("POST /rele.php HTTP/1.1");
+    client.println("Host: releksi.000webhostapp.com");
     client.println("User-Agent: AplinkosOroStebejimoStotele_2.0");
     client.println("Connection: close");
     client.println("Content-Type: application/x-www-form-urlencoded;");   
