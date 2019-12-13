@@ -17,8 +17,8 @@ Adafruit_BMP085 bmp;
 
 int minTemp = 20;
 int maxTemp = 24;
-
-byte mac[] = {0x70, 0x4D, 0x7B, 0x3E, 0x8A, 0x7C};
+byte mac[] = {0x2C, 0x56, 0xDC, 0xBB, 0x22, 0x6B};
+//byte mac[] = {0x70, 0x4D, 0x7B, 0x3E, 0x8A, 0x7C};
 // Set the static IP address to use if the DHCP fails to assign
 IPAddress ip(192, 168, 0, 177);
 IPAddress myDns(192, 168, 1, 1);
