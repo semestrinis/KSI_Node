@@ -38,7 +38,7 @@ unsigned long lastConnectionTime = 0;           // last time you connected to th
 const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
 
 
-String response = "";
+String response = " ";
 //
 //unsigned long beginMicros, endMicros;
 //unsigned long byteCount = 0;
@@ -47,6 +47,9 @@ String response = "";
 
 void setup()
 {
+  digitalWrite(LedGreen, HIGH);
+  digitalWrite(LedBlue, HIGH);
+  digitalWrite(LedRed, HIGH);
   Serial.begin(9600);
   while (!Serial)
   {
@@ -94,7 +97,9 @@ void setup()
 
 
 //  beginMicros = micros();
-
+      digitalWrite(LedGreen, HIGH);
+      digitalWrite(LedBlue, LOW);
+      digitalWrite(LedRed, HIGH);
   
 }
 
@@ -108,18 +113,18 @@ void loop()
   if (client.available())
   {
     c = client.read();
-    response += c;
+//    response += c;
     Serial.write(c);
   }
   
 
-  String ss = String("" + c);
+//  String ss = String("" + c);
 
   // if ten seconds have passed since your last connection,
   // then connect again and send data:
   if (millis() - lastConnectionTime > postingInterval)
   {
-    Serial.print(response);
+//    Serial.print(response);
 //    Serial.print("\n");
 //    Serial.print(response.length());
 //    Serial.print("\n");
@@ -140,14 +145,42 @@ void loop()
       tempMax += response[response.indexOf("Max_Temp\": ")+13];
     }
 
-    Serial.println("\n");
-    Serial.println(tempMin);
-    Serial.println("\n");
-    Serial.println(tempMax);
-    Serial.println("\n");
+
     
     minTemp = tempMin.toInt();
     maxTemp = tempMax.toInt();
+
+    if(tempMin == tempMax)
+    {
+      int minTemp = 20;
+      int maxTemp = 24;
+    }
+    else if (minTemp == NULL || maxTemp == NULL || isnan(minTemp) || isnan(maxTemp))
+    {
+      Serial.println("E Case Hit 4");
+      digitalWrite(LedGreen, HIGH);
+      digitalWrite(LedBlue, HIGH);
+      digitalWrite(LedRed, HIGH);
+      int minTemp = 20;
+      int maxTemp = 24;
+    }
+    else if(tempMax < tempMin)
+    {
+      int minTemp = 20;
+      int maxTemp = 24;
+    }
+    else if(tempMax == 0 && tempMin == 0)
+    {
+      int minTemp = 20;
+      int maxTemp = 24;
+    }
+    
+
+    Serial.print("\nTempMin:");
+    Serial.print(tempMin);
+    Serial.print("TempMax:");
+    Serial.print(tempMax);
+    Serial.print("|\n");
 //
 //    Serial.println("\n");
 //    Serial.println(minTemp);
@@ -155,17 +188,10 @@ void loop()
 //    Serial.println(maxTemp);
 //    Serial.println("\n");
 
-    
-//    Serial.print(response.indexOf("RESPONSE;min:"));
-//    Serial.print("\n");
-//    Serial.print(response.indexOf(response[response.indexOf("RESPONSE;min:")]));
-//    Serial.print("\n");
-//    Serial.print(response[response.indexOf("RESPONSE;min:")+13]);
-//    Serial.print("\n");
-    Serial.println("delay hit");
-    delay(40000);
+//    Serial.println("delay hit");
+//    delay(40000);
     httpRequest();
-    response = "";
+    response = " ";
   }
 }
 
@@ -196,21 +222,23 @@ void httpRequest()
     //int humidity = 0;
     //int presure = 0;
     //int Ligth = 0;
-
     if (temperature1 > minTemp && temperature1 < maxTemp)
     {
+      Serial.println("E Case Hit 1");
       digitalWrite(LedGreen, HIGH);
       digitalWrite(LedBlue, LOW);
       digitalWrite(LedRed, LOW);
     }
     else if (temperature1 > minTemp && temperature1 > maxTemp)
     {
+      Serial.println("E Case Hit 2");
       digitalWrite(LedGreen, LOW);
       digitalWrite(LedBlue, LOW);
       digitalWrite(LedRed, HIGH);
     }
     else if (temperature1 < minTemp && temperature1 < maxTemp)
     {
+      Serial.println("E Case Hit 3");
       digitalWrite(LedGreen, LOW);
       digitalWrite(LedBlue, HIGH);
       digitalWrite(LedRed, LOW);
@@ -239,22 +267,7 @@ void httpRequest()
     Serial.println(Ligth);
 
     Serial.println("connecting...");
-    String PostData = "";//"appData={\"itemID\":";
-    //String itemID = "A56654S";
-    //PostData += itemID + ",";
-
-
-//    PostData += "{\"Temperature1\":";
-//    PostData += temperature1;
-//    PostData += ",\"Humidity\":";
-//    PostData += humidity;
-//    PostData += ",\"Presure\":";
-//    PostData += presure;
-//    PostData += ",\"Temperature2\":";
-//    PostData += temperature2;
-//    PostData += ",\"Ligth\":";
-//    PostData += Ligth;
-//    PostData += "}";
+    String PostData = "";
 
     PostData = "temperature1=";
     PostData += temperature1;    
@@ -267,21 +280,7 @@ void httpRequest()
     PostData += "&light=";
     PostData += Ligth;
 
-
-    //String strTemp1 = "";
-    //strTemp1 += temperature1;
-    //strTemp1 += "}";
-    //Serial.println(strTemp1);
-    //PostData += "}";
     Serial.println(PostData);
-
-
-//    client.println("POST /~nedzil/post_temp.php HTTP/1.1");
-//    client.println("Host: stud.if.ktu.lt");
-//    client.println("POST /api/arduino/newmat1 HTTP/1.1");
-//    client.println("Host: ksi-projektas.herokuapp.com");
-//    client.println("POST /2d3c6b5c-b08a-48de-ab81-378204bf5781 HTTP/1.1");
-//    client.println("Host: webhook.site");
     client.println("POST /rele.php HTTP/1.1");
     client.println("Host: releksi.000webhostapp.com");
     client.println("User-Agent: AplinkosOroStebejimoStotele_2.0");
@@ -295,80 +294,10 @@ void httpRequest()
     client.println(PostData.length());
     client.println();
     client.print(PostData);
-//    client.println("temperature1=");
-//    client.print(temperature1);
-//    client.println("");
-//    client.println("humidity=");
-//    client.print(humidity);
-//    client.println();
-//    client.println("humidity=");
-//    client.println(humidity);
-    //client.println();
-
-    
-    
-    //client.println();
-
-
-//    String PostData1 = "temperature1=";
-//    PostData1 += temperature1;    
-//    PostData += "humidity=";
-//    PostData += humidity;
-//    PostData += "temperature2=";
-//    PostData += temperature2;
-//    PostData += "presure=";
-//    PostData += presure;
-//    PostData += "light=";
-//    PostData += Ligth;
-    
-    //client.println("Data: someRandom data");
-    //client.println();
 
     // note the time that the connection was made:
     lastConnectionTime = millis();
     Serial.println("Request sent");
-
-//    while (client.connected())
-//    {
-//      while (client.available()) 
-//      {
-//        char thisChar = client.read();
-//        //inData += thisChar;
-//        Serial.print(thisChar);
-//      }
-//      client.stop();
-//      return 1;
-//    }
-
-    
-
-    
-    //Serial.println(client.response);
-
-//    if (!client.connected())
-//    {
-//      
-//      endMicros = micros();
-//      Serial.println();
-//      Serial.println("disconnecting.");
-//      client.stop();
-//      Serial.print("Received ");
-//      Serial.print(byteCount);
-//      Serial.print(" bytes in ");
-//      float seconds = (float)(endMicros - beginMicros) / 1000000.0;
-//      Serial.print(seconds, 4);
-//      float rate = (float)byteCount / seconds / 1000.0;
-//      Serial.print(", rate = ");
-//      Serial.print(rate);
-//      Serial.print(" kbytes/second");
-//      Serial.println();
-//  
-//      // do nothing forevermore:
-//      while (true) 
-//      {
-//        delay(1);
-//      }
-//    }
   }
   else
   {
