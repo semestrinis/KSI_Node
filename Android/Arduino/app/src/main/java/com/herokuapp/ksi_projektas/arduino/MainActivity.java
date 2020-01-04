@@ -175,9 +175,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{});
-            for (int i = 0; i < matavimai.length; i++)
+            for (int i = matavimai.length-1; i >0 ; i--)
             {
-                series.appendData(new DataPoint(i,matavimai[i].Temperatura1),true,matavimai.length+1);
+                series.appendData(new DataPoint(matavimai.length - i,matavimai[i].Temperatura1),true,matavimai.length+1);
             }
             graph.addSeries(series);
 
