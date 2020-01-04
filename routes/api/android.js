@@ -30,7 +30,7 @@ router.get('/temperaturos', async(req, res) =>
     try 
     {
       const client = await pool.connect()
-      const result = await client.query('SELECT * FROM public."Matavimai", public."Ribos" ORDER BY public."Matavimai"."ID" LIMIT 100;');
+      const result = await client.query('SELECT * FROM public."Matavimai", public."Ribos" ORDER BY public."Matavimai"."ID" DESC LIMIT 150;');
       const results = { 'results': (result) ? result.rows : null};
       
       res.send(JSON.stringify(results));

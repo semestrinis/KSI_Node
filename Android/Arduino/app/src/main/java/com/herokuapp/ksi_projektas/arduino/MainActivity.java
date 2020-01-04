@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.button_refresh: {
                 gautiDuomenis();
+                gautiGrafika();
                 break;
             }
             case R.id.button_new_ribos: {
@@ -175,9 +176,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{});
-            for (int i = matavimai.length-1; i >0 ; i--)
+            for (int i = 0; i < matavimai.length ; i++)
             {
-                series.appendData(new DataPoint(matavimai.length - i,matavimai[i].Temperatura1),true,matavimai.length+1);
+                series.appendData(new DataPoint(i,matavimai[i].Temperatura1),true,matavimai.length+1);
             }
             graph.addSeries(series);
 
