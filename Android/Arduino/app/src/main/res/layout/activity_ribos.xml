@@ -6,10 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Spinner
+        android:id="@+id/spinner_iki"
+        android:layout_width="258dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_riba_iki" />
+
     <TextView
         android:id="@+id/textView_riba_nuo"
         android:layout_width="204dp"
-        android:layout_height="24dp"
+        android:layout_height="27dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Riba nuo"
@@ -21,42 +30,20 @@
         android:layout_width="204dp"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="44dp"
         android:text="Riba iki"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_riba_nuo" />
-
-    <EditText
-        android:id="@+id/editText_riba_iki"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_riba_iki" />
-
-    <EditText
-        android:id="@+id/editText_riba_nuo"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_riba_nuo" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_nuo" />
 
     <Button
         android:id="@+id/button_atnaujinti_ribas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="Atnaujinti"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_riba_iki" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_iki" />
 
     <Button
         android:id="@+id/button_back"
@@ -67,5 +54,14 @@
         android:text="Atgal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_nuo"
+        android:layout_width="258dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_riba_nuo" />
 
 </android.support.constraint.ConstraintLayout>

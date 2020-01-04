@@ -35,6 +35,30 @@ public class DataAPI {
         }
         return matavimai;
     }
+
+    public static Matavimas[] gautiTemperaturas(String RestURL) throws Exception
+    {
+        Matavimas[] matavimai;
+        String response= WebAPI.gautiTemperaturas(RestURL);
+        if(response.length() > 1)
+        {
+            response = response.substring(1,response.length()-1);
+            Gson gson;
+            gson = new Gson();
+
+            Log.d("Response1",response);
+            //int start = response.indexOf('[');
+            //int end = response.indexOf(']');
+            //String editedresponse = response.substring(start+1,end);
+
+            //Log.d("Response1.5",editedresponse);
+            Type type = new TypeToken<Matavimas[]>(){}.getType();
+            matavimai = gson.fromJson(response,type);
+            Log.d("Response2",matavimai.toString());
+        }
+        return matavimai;
+    }
+
     public static void atnaujintiRibas(String RestURL, String Nuo, String Iki) throws Exception
     {
 

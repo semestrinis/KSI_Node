@@ -12,6 +12,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,24 +26,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     private Button Button_Refresh;
     private Button Button_new_ribos;
+    GraphView graph;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gautiDuomenis();
+
         setContentView(R.layout.activity_main);
+        gautiDuomenis();
         Button_Refresh = findViewById(R.id.button_refresh);
         Button_Refresh.setOnClickListener(this);
 
         Button_new_ribos = findViewById(R.id.button_new_ribos);
         Button_new_ribos.setOnClickListener(this);
+
+        graph = (GraphView) findViewById(R.id.graph);
+
     }
 
 
     private void gautiDuomenis() {
-
         new MainActivity.gautiDuomenisTask().execute(Tools.RestURL, null, null);
+    }
 
+    private void gautiGrafika() {
+        new MainActivity.gautiGrafikaTask().execute(Tools.RestURL, null, null);
     }
 
     @Override
@@ -123,6 +134,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 spalva.setBackgroundColor(Color.parseColor("#00FF00"));
             }
+        }
+    }
+
+    public class gautiGrafikaTask extends AsyncTask<String, Void, Matavimas[]> {
+        //private static final String TAG = "gautiUzrasusTask";
+        ProgressDialog actionProgressDialog = new ProgressDialog(MainActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            actionProgressDialog.setMessage("Gaunami matavimai");
+            actionProgressDialog.show();
+            actionProgressDialog.setCancelable(false);
+            super.onPreExecute();
+        }
+
+        protected Matavimas[] doInBackground(String... str_param) {
+            String RestURL = str_param[0];
+            Matavimas[] matavimai;
+            try {
+                matavimai = DataAPI.gautiTemperaturas(RestURL);
+                return matavimai;
+            } catch (Exception ex) {
+                Log.e(TAG, ex.toString());
+            }
+            return null;
+        }
+
+        protected void onProgressUpdate(Void... progress) {
+        }
+
+        protected void onPostExecute(Matavimas[] result) {
+            actionProgressDialog.cancel();
+            rodytiGrafika(result);
+        }
+
+
+        private void rodytiGrafika(Matavimas[] matavimai) {
+
+
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                    new DataPoint(0, 0)
+            });
+            for (int i = 1; i<= matavimai.length+1; i++)
+            {
+                series.appendData(new DataPoint(i,matavimai[i].Temperatura1),true,matavimai.length+1);
+            }
+            graph.addSeries(series);
+
         }
     }
 }

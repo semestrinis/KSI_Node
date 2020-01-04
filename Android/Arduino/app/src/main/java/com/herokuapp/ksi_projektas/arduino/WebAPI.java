@@ -42,6 +42,26 @@ public class WebAPI {
         return response.toString();
     }
 
+    public static String gautiTemperaturas(String url)throws  Exception {
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection)obj.openConnection();
+        con.setRequestMethod("GET");
+        int responseCode = con.getResponseCode();
+        StringBuffer response = new StringBuffer();
+        System.out.println("Response Code :: " + responseCode);
+        if (responseCode == HttpURLConnection.HTTP_OK) { //connection ok
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            //StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+        }
+        return response.toString();
+    }
+
     public static void atnaujintiRibas(String url, String Nuo, String Iki)throws  Exception {
         String data = "{\"nuo\":\""+Nuo+"\", \"iki\":\""+Iki+"\"}"; //data to post
         //String data = "pav:"+pav+",kat1:"+kat+",tekstas:"+tekstas; //data to post

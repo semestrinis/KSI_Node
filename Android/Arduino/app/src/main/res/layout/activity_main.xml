@@ -11,7 +11,6 @@
         android:layout_width="116dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Šviesa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_humidity_name" />
@@ -21,7 +20,6 @@
         android:layout_width="116dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Ribos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_light_name" />
@@ -31,7 +29,6 @@
         android:layout_width="116dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Drėgnis"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_pressure_name" />
@@ -41,7 +38,6 @@
         android:layout_width="116dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Slėgis"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_temp_name" />
@@ -51,7 +47,7 @@
         android:layout_width="116dp"
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/text_ribos_name"
         app:layout_constraintTop_toBottomOf="@+id/text_light_value" />
@@ -61,7 +57,7 @@
         android:layout_width="116dp"
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/text_light_name"
         app:layout_constraintTop_toBottomOf="@+id/text_humidity_value" />
@@ -69,9 +65,9 @@
     <TextView
         android:id="@+id/text_humidity_value"
         android:layout_width="116dp"
-        android:layout_height="22dp"
+        android:layout_height="21dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/text_humidity_name"
         app:layout_constraintTop_toBottomOf="@+id/text_pressure_value" />
@@ -81,7 +77,7 @@
         android:layout_width="116dp"
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/text_pressure_name"
         app:layout_constraintTop_toBottomOf="@+id/text_temp_value" />
@@ -119,7 +115,7 @@
     <TextView
         android:id="@+id/text_refresh_time"
         android:layout_width="242dp"
-        android:layout_height="72dp"
+        android:layout_height="36dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Atnaujinimo laikas: 0000-0000-0000"
@@ -141,9 +137,20 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Keisti ribas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_refresh_time" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="177dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_new_ribos"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
