@@ -113,8 +113,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             TextView text_refresh_time = findViewById(R.id.text_refresh_time);
             Button spalva = findViewById(R.id.button_spalva);
 
-            text_temp_value.setText("" + matavimas.Temperatura2);
-            Log.d("test","temp:" + matavimas.Temperatura2);
+            text_temp_value.setText("" + matavimas.Temperatura1);
+            Log.d("test","temp:" + matavimas.Temperatura1);
             text_pressure_value.setText("" + matavimas.Slegis);
             text_humidity_value.setText("" + matavimas.Dregme);
             text_light_value.setText("" + matavimas.Sviesa);
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{});
             for (int i = 0; i < matavimai.length; i++)
             {
-                series.appendData(new DataPoint(i,matavimai[i].Temperatura2),true,matavimai.length+1);
+                series.appendData(new DataPoint(i,matavimai[i].Temperatura1),true,matavimai.length+1);
             }
             graph.addSeries(series);
 
