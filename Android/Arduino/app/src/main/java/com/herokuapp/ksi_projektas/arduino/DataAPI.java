@@ -47,16 +47,17 @@ public class DataAPI {
             gson = new Gson();
 
             Log.d("Response1",response);
-            //int start = response.indexOf('[');
-            //int end = response.indexOf(']');
-            //String editedresponse = response.substring(start+1,end);
+            int start = response.indexOf('[');
+            int end = response.indexOf(']');
+            String editedresponse = response.substring(start,end+1);
 
-            //Log.d("Response1.5",editedresponse);
+            Log.d("Response1.5",editedresponse);
             Type type = new TypeToken<Matavimas[]>(){}.getType();
-            matavimai = gson.fromJson(response,type);
+            matavimai = gson.fromJson(editedresponse,type);
             Log.d("Response2",matavimai.toString());
+            return matavimai;
         }
-        return matavimai;
+        return null;
     }
 
     public static void atnaujintiRibas(String RestURL, String Nuo, String Iki) throws Exception
