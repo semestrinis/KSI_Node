@@ -34,7 +34,7 @@ router.post('/newmat1', async(req, res) =>
 		console.log("pre q1");
 		const client = await pool.connect()
 		const result = await client.query(query1);
-		pool.done();
+		//pool.done();
 		client.done();
 		console.log("q1 done");
     } 
