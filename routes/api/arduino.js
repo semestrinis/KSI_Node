@@ -81,9 +81,9 @@ router.post('/newmat1', async(req, res) =>
 	
 	client.done();
 	pool.done();
-	
-	//done();
-	//pool.end();
+
+	done();
+	pool.end();
 	client.end();
     return res.end();
 });
