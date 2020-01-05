@@ -1,5 +1,4 @@
 extends layout
-script(src='https://cdn.jsdelivr.net/npm/chart.js@2.8.0')
 block content
 	div(class="container")
 		div(class="row")
@@ -60,23 +59,17 @@ block content
 				h1	Grafikai
 					.col-6
 					canvas#lineChartTemp(width='100', height='20')
-					script(type='text/javascript', src='https://cdn.jsdelivr.net/npm/chart.js@2.8.0').
-						{
-							var TempChart = document.getElementById("lineChartTemp").getContext('2d');
-							var gradientFill = TempChart.createLinearGradient(0, 0, 0, 290);
-							gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
-							gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
-							//var dataM2 = [21, 21.5, 22];
+					script.
+							var TempChart = document.getElementById("myChart").getContext('2d');
 							var myLineChart = new Chart(TempChart, {
 							type: 'line',
 							data: {
-							labels: ["data.results.Data", "545", "5454", "6656"],
-							datasets: [{
-							label: "Temperatura",
-							data: [12, 12, 12, 12]
-							}]
+								labels: ["data.results.Data", "545", "5454", "6656"],
+								datasets: [{
+								label: "Temperatura",
+								data: ["12", "12", "12", "12"]
+								}]
 							},
 							options: {						
 							}
-							});	
-						}
+							});
