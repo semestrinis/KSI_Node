@@ -33,8 +33,7 @@ block content
 							td= data.results[0].Dregme
 							td= data.results[0].Sviesa
 							td= data.results[0].Data
-							tr	
-							-var duom = results[0].Temperatura1
+							tr				
 		h1	Dabartinės ribos
 		div(class="row move-down")
 			div(class="col-md-8")
@@ -60,7 +59,9 @@ block content
 				h1	Grafikai
 					.col-6
 					canvas#lineChartTemp(width='100', height='20')
+						script(type="text/javascript")!= "var myData = " + JSON.stringify(data)
 						script.
+							console.log(myData);
 							var TempChart = document.getElementById("lineChartTemp").getContext('2d');
 							var myLineChart = new Chart(TempChart, {
 							type: 'line',
@@ -68,7 +69,7 @@ block content
 								labels: ["5454"],
 								datasets: [{
 								label: "Temperatura",
-								data: [duom]
+								data: [1]
 								}]
 							},
 							options: {						
