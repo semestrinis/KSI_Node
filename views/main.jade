@@ -59,20 +59,19 @@ block content
 				h1	Grafikai
 					.col-6
 					canvas#lineChartTemp(width='100', height='20')
-							-var temp1 = data.results[0].Temperatura1;
-							-var temp2 = data.results[1].Temperatura1;
-							-var TempChart = document.getElementById("lineChartTemp").getContext('2d');
-							-var myLineChart = new Chart(TempChart, {
-							-type: 'line',
-							-data: {
-								-labels: ["5454"],
-								-datasets: [{
-								-label: "Temperatura",
-								-data: [
-								data.results[0].Temperatura1
-									-]
-								-}]
-							-},
-							-options: {						
-							-}
-							-});
+						script.
+							var temp1 = data1.results1[0].Min_Temp;
+							var temp2 = data.results[1].Temperatura1;
+							var TempChart = document.getElementById("lineChartTemp").getContext('2d');
+							var myLineChart = new Chart(TempChart, {
+							type: 'line',
+							data: {
+								labels: ["5454"],
+								datasets: [{
+								label: "Temperatura",
+								data: [temp1]
+								}]
+							},
+							options: {						
+							}
+							});
