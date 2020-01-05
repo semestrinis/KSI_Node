@@ -70,6 +70,8 @@ block content
 							temp.push(myData.results[i].Data);
 							tempData.push(myData.results[i].Temperatura1);
 							}
+							console.log(temp);
+							console.log(tempData);
 							var TempChart = document.getElementById("lineChartTemp").getContext('2d');
 							var myLineChart = new Chart(TempChart, {
 							type: 'line',
