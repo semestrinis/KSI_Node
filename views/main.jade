@@ -64,10 +64,10 @@ block content
 							var myLineChart = new Chart(TempChart, {
 							type: 'line',
 							data: {
-								labels: ["data.results.Data", "545", "5454", "6656"],
+								labels: ["5454", "6656"],
 								datasets: [{
 								label: "Temperatura",
-								data: [data.results.Temperatura1]
+								data: [data.results[0].Temperatura1, data.results[1].Temperatura1]
 								}]
 							},
 							options: {						
