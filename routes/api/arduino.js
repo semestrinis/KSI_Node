@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-
+var conString = "postgres://knotkblukjengl:d7aa6ad5b04ec7c34a2a07afa5773f5c9cfe380e712ad3e221558d9755ddcfaf@ec2-54-247-177-254.eu-west-1.compute.amazonaws.com:5432/d5ovb62l5q77eg";
 const { Pool } = require('pg');
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+//   connectionString: process.env.DATABASE_URL,
+  connectionString: conString,
   ssl: true
 });
 
