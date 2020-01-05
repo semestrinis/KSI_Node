@@ -60,7 +60,7 @@ block content
 					.col-6
 					canvas#lineChartTemp(width='100', height='20')
 					script.
-							var TempChart = document.getElementById("myChart").getContext('2d');
+							var TempChart = document.getElementById("lineChartTemp").getContext('2d');
 							var myLineChart = new Chart(TempChart, {
 							type: 'line',
 							data: {
