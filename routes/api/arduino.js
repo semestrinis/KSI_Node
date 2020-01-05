@@ -78,6 +78,9 @@ router.post('/newmat1', async(req, res) =>
 		res.send("Error " + err);
 	}
 	console.log("Process is done");
+
+	client.end();
+    return res.end();
 });
 
 
