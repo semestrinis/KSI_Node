@@ -79,6 +79,7 @@ router.post('/newmat1', async(req, res) =>
 	}
 	console.log("Process is done");
 
+	pool.end();
 	client.end();
     return res.end();
 });
