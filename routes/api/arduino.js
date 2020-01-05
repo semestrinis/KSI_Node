@@ -34,9 +34,6 @@ router.post('/newmat1', async(req, res) =>
 		console.log("pre q1");
 		const client = await pool.connect()
 		const result = await client.query(query1);
-		//pool.done();
-		//client.done();
-		done();
 		console.log("q1 done");
     } 
     catch (err) 
@@ -83,13 +80,13 @@ router.post('/newmat1', async(req, res) =>
 	}
 	console.log("Process is done");
 	// console.log(process.env.DATABASE_URL);
-	client.done();
-	pool.done();
+	// client.done();
+	// pool.done();
 
-	done();
-	pool.end();
-	client.end();
-    return res.end();
+	// done();
+	// pool.end();
+	// client.end();
+    // return res.end();
 });
 
 
