@@ -80,6 +80,8 @@ router.post('/newmat1', async(req, res) =>
 	console.log("Process is done");
 	
 	client.done();
+	pool.done();
+	
 	//done();
 	//pool.end();
 	client.end();
