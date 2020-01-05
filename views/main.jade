@@ -63,14 +63,21 @@ block content
 
 						script.
 							console.log(myData);
+							var i;
+							var temp = [];
+							var tempData = [];
+							for (i = 0; i < myData.length; i++) {
+							temp.push(myData.results[i].Data);
+							tempData.push(myData.results[i].Temperatura1);
+							}
 							var TempChart = document.getElementById("lineChartTemp").getContext('2d');
 							var myLineChart = new Chart(TempChart, {
 							type: 'line',
 							data: {
-								labels: myData.results.Data,
+								labels: temp,
 								datasets: [{
 								label: "Temperatura",
-								data: myData.results.Temperatura1
+								data: tempData
 								}]
 							},
 							options: {						
