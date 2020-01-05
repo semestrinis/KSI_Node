@@ -58,6 +58,8 @@ block content
 				else
 					h1(style='background-color: lightblue')= rezultatas
 				h1	Grafikai
+					.col-6
+					canvas#lineChartTemp(width='100', height='20')
 				script(type='text/javascript').
 					{
 						var TempChart = document.getElementById("lineChartTemp").getContext('2d');
