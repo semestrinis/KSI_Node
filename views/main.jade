@@ -62,11 +62,12 @@ block content
 						script(type="text/javascript")!= "var myData = " + JSON.stringify(data)
 
 						script.
+							console.log(myData);
 							var TempChart = document.getElementById("lineChartTemp").getContext('2d');
 							var myLineChart = new Chart(TempChart, {
 							type: 'line',
 							data: {
-								labels: ["5454"],
+								labels: [myData.results[0].Data],
 								datasets: [{
 								label: "Temperatura",
 								data: [myData.results[0].Temperatura1]
