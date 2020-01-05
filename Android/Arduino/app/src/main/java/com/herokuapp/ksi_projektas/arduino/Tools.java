@@ -5,5 +5,6 @@ public class Tools {
     //public static String NaujintiURL = "localhost:3000/api/android/ribos";
     public static String RestURL = "https://ksi-projektas.herokuapp.com/api/android/get";
     public static String NaujintiURL = "https://ksi-projektas.herokuapp.com/api/android/ribos";
+    public static String ViskasURL = "https://ksi-projektas.herokuapp.com/api/android/temperaturos";
 
 }

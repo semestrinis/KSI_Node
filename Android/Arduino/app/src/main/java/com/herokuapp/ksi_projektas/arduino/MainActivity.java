@@ -12,6 +12,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,24 +26,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     private Button Button_Refresh;
     private Button Button_new_ribos;
+    GraphView graph;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gautiDuomenis();
+
         setContentView(R.layout.activity_main);
+        gautiDuomenis();
         Button_Refresh = findViewById(R.id.button_refresh);
         Button_Refresh.setOnClickListener(this);
 
         Button_new_ribos = findViewById(R.id.button_new_ribos);
         Button_new_ribos.setOnClickListener(this);
+
+        graph = (GraphView) findViewById(R.id.graph);
+        gautiGrafika();
+
     }
 
 
     private void gautiDuomenis() {
-
         new MainActivity.gautiDuomenisTask().execute(Tools.RestURL, null, null);
+    }
 
+    private void gautiGrafika() {
+        new MainActivity.gautiGrafikaTask().execute(Tools.ViskasURL, null, null);
     }
 
     @Override
@@ -47,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.button_refresh: {
                 gautiDuomenis();
+                gautiGrafika();
                 break;
             }
             case R.id.button_new_ribos: {
@@ -101,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             TextView text_refresh_time = findViewById(R.id.text_refresh_time);
             Button spalva = findViewById(R.id.button_spalva);
 
-            text_temp_value.setText("" + matavimas.Temperatura2);
-            Log.d("test","temp:" + matavimas.Temperatura2);
+            text_temp_value.setText("" + matavimas.Temperatura1);
+            Log.d("test","temp:" + matavimas.Temperatura1);
             text_pressure_value.setText("" + matavimas.Slegis);
             text_humidity_value.setText("" + matavimas.Dregme);
             text_light_value.setText("" + matavimas.Sviesa);
@@ -123,6 +136,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 spalva.setBackgroundColor(Color.parseColor("#00FF00"));
             }
+        }
+    }
+
+    public class gautiGrafikaTask extends AsyncTask<String, Void, Matavimas[]> {
+        //private static final String TAG = "gautiUzrasusTask";
+        ProgressDialog actionProgressDialog = new ProgressDialog(MainActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            actionProgressDialog.setMessage("Gaunami matavimai");
+            actionProgressDialog.show();
+            actionProgressDialog.setCancelable(false);
+            super.onPreExecute();
+        }
+
+        protected Matavimas[] doInBackground(String... str_param) {
+            String RestURL = str_param[0];
+            Matavimas[] matavimai;
+            try {
+                matavimai = DataAPI.gautiTemperaturas(RestURL);
+                return matavimai;
+            } catch (Exception ex) {
+                Log.e(TAG, ex.toString());
+            }
+            return null;
+        }
+
+        protected void onProgressUpdate(Void... progress) {
+        }
+
+        protected void onPostExecute(Matavimas[] result) {
+            actionProgressDialog.cancel();
+            rodytiGrafika(result);
+        }
+
+
+        private void rodytiGrafika(Matavimas[] matavimai) {
+
+
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{});
+            for (int i = 0; i < matavimai.length ; i++)
+            {
+                series.appendData(new DataPoint(i,matavimai[i].Temperatura1),true,matavimai.length+1);
+            }
+            graph.addSeries(series);
+
         }
     }
 }

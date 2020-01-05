@@ -11,9 +11,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Comparator;
+
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,13 +28,30 @@ public class RibosActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "RibosActivity";
     private Button Button_atnaujinti_ribas;
     private Button Button_atgal;
+    private Spinner spin_nuo;
+    private Spinner spin_iki;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gautiDuomenis2();
+
         setContentView(R.layout.activity_ribos);
+
+        gautiDuomenis2();
+        spin_nuo = findViewById(R.id.spinner_nuo);
+        spin_iki = findViewById(R.id.spinner_iki);
+
+        Integer[] items = new Integer[101];
+        for ( int i = 0; i<= 100; i++)
+        {
+            items[100-i] = i - 20;
+        }
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, items);
+        spin_nuo.setAdapter(adapter);
+        spin_iki.setAdapter(adapter);
+
         Button_atnaujinti_ribas = findViewById(R.id.button_atnaujinti_ribas);
         Button_atnaujinti_ribas.setOnClickListener(this);
 
@@ -96,12 +118,17 @@ public class RibosActivity extends AppCompatActivity implements View.OnClickList
 
         private void rodytiMatavimus(Matavimas matavimas) {
 
-            EditText editText_riba_nuo = findViewById(R.id.editText_riba_nuo);
+            //EditText editText_riba_nuo = findViewById(R.id.editText_riba_nuo);
 
-            EditText editText_riba_iki = findViewById(R.id.editText_riba_iki);
+            //EditText editText_riba_iki = findViewById(R.id.editText_riba_iki);
 
-            editText_riba_nuo.setText("" + matavimas.Min_Temp);
-            editText_riba_iki.setText("" + matavimas.Max_Temp);
+            //editText_riba_nuo.setText("" + matavimas.Min_Temp);
+            //editText_riba_iki.setText("" + matavimas.Max_Temp);
+            int nuo = 80 - (int) matavimas.Min_Temp;
+            int iki = 80 - (int) matavimas.Max_Temp;
+            spin_nuo.setSelection(nuo);
+            spin_iki.setSelection(iki);
+
             Log.d("ribos","ribos:" + matavimas.Min_Temp + " - " + matavimas.Max_Temp);
 
         }
@@ -123,13 +150,23 @@ public class RibosActivity extends AppCompatActivity implements View.OnClickList
             String RestURL = str_param[0];
             Matavimas matavimai = new Matavimas();
             try {
-                EditText editText_riba_nuo = findViewById(R.id.editText_riba_nuo);
-                EditText editText_riba_iki = findViewById(R.id.editText_riba_iki);
-                String nuo = "" + editText_riba_nuo.getText();
-                String iki = "" + editText_riba_iki.getText();
+                //EditText editText_riba_nuo = findViewById(R.id.editText_riba_nuo);
+                //EditText editText_riba_iki = findViewById(R.id.editText_riba_iki);
+                //String nuo = "" + editText_riba_nuo.getText();
+                //String iki = "" + editText_riba_iki.getText();
 
 
-                DataAPI.atnaujintiRibas(RestURL, nuo, iki);
+                String nuo = spin_nuo.getSelectedItem().toString();
+                String iki = spin_iki.getSelectedItem().toString();
+
+
+                if( nuo.compareTo(iki) <= 0) {
+                    DataAPI.atnaujintiRibas(RestURL, nuo, iki);
+                }
+                else
+                {
+                    DataAPI.atnaujintiRibas(RestURL, iki, nuo);
+                }
 
 
             } catch (Exception ex) {

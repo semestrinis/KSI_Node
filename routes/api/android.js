@@ -25,6 +25,24 @@ router.get('/get', async(req, res) =>
     }
 });
 
+router.get('/temperaturos', async(req, res) =>
+{
+    try 
+    {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM public."Matavimai", public."Ribos" ORDER BY public."Matavimai"."ID" DESC LIMIT 150;');
+      const results = { 'results': (result) ? result.rows : null};
+      
+      res.send(JSON.stringify(results));
+      client.release();
+    } 
+    catch (err) 
+    {
+      console.error(err);
+      res.send("Error " + err);
+    }
+});
+
 router.post('/ribos', async(req, res) =>
 {
     var tempFrom = req.body.nuo;
