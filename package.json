@@ -14,7 +14,8 @@
     "jade": "~1.11.0",
     "morgan": "^1.9.1",
     "pg": "^7.14.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "timeout": "^0.2.1"
   },
   "description": "1. Ádiegti reikalingus modulius:\r \tnpm install\r 2. Paleisti:\r \tnpm start\r 3. Jei nepasileidþia: pakeisti portà bin/www faile arba atnaujinti sqlite3 modulá:\r \tnpm uninstall sqlite3\r \tnpm install sqlite3\r 4. Sustabdyti:\r \tCTRL + C",
   "main": "app.js",
