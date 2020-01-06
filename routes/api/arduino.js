@@ -79,6 +79,7 @@ router.post('/newmat1', async(req, res) =>
 		res.send("Error " + err);
 	}
 	console.log("Process is done");
+	client.release();
 	// console.log(process.env.DATABASE_URL);
 	// client.done();
 	// pool.done();
